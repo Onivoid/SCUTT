@@ -1,0 +1,26 @@
+appId: 40627Onivoid.SCUTT-StarCitizenUniversalTranslation
+productName: SCUTT - Star Citizen Universal Translation Tool
+copyright: Copyright © 2023 Logan Wilquin
+directories:
+  output: dist
+  buildResources: resources
+files:
+  - from: .
+    filter:
+      - package.json
+      - app
+publish: null
+
+win:
+  target: ["AppX"]
+  icon: "build/icons/icon.ico"
+
+appx:
+  applicationId: "Onivoid.SCUTTStarCitizenUniversalTranslation"
+  displayName: "SCUTT - Star Citizen Universal Translation Tool"
+  publisher: "CN=EE5235BB-CE68-42FB-BF7E-31B637CF4642"
+  publisherDisplayName: "Onivoid"
+  identityName: "40627Onivoid.SCUTT-StarCitizenUniversalTranslation"
+  languages: 
+    - "fr-fr"
+    - "en-us"

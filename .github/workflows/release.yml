@@ -1,0 +1,28 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Node.js, NPM
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+
+      - run: npm ci
+      - run: npm run build # Assurez-vous que cette commande construit le MSIX
+      - run: dir dist
+
+      - name: Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: ".\\dist\\*.appx" # Changez pour pointer vers les fichiers MSIX

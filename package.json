@@ -1,0 +1,41 @@
+{
+  "private": true,
+  "name": "scutt",
+  "description": "Star Citizen Universal Translation Tool",
+  "version": "1.0.0",
+  "author": "Logan Wilquin <onivoid.tv@gmail.com>",
+  "main": "app/background.js",
+  "scripts": {
+    "dev": "nextron",
+    "prep": "npm install --save",
+    "build": "nextron build --config electron-builder.yml --publish never",
+    "postinstall": "electron-builder install-app-deps",
+    "release": "cross-var npm install --save && git add . && cross-var git commit -m v$npm_package_version && git push origin master && cross-var git tag v$npm_package_version && cross-var git push origin v$npm_package_version"
+  },
+  "build": {
+    "productName": "Star Citizen Universal Translation Tool",
+    "icon": "resources/icon"
+  },
+  "repository": "https://github.com/Skullyfox/SCUTT",
+  "publish": {
+    "provider": "github",
+    "releaseType": "release"
+  },
+  "dependencies": {
+    "cross-var": "^1.1.0",
+    "electron-serve": "^1.1.0",
+    "electron-store": "^8.1.0",
+    "evergreen-ui": "^7.1.9"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.18",
+    "@types/react": "^18.0.26",
+    "electron": "^26.2.2",
+    "electron-builder": "^24.9.1",
+    "next": "^12.3.4",
+    "nextron": "^8.12.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.2.2"
+  }
+}
