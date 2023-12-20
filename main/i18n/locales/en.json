@@ -2,8 +2,14 @@
   "runPage_title": "SCUTT - Launch",
   "runPage_loadingMessage": "Software launching...",
   "homePage_title": "SCUTT - Home",
+  "translatePage_title": "SCUTT - Translation",
+  "translatePage_versionSelectionInstruction": "Game version to translate:",
+  "translatePage_diskSelectionInstruction": "Select the Star Citizen installation disk:",
+  "translatePage_diskScanButton": "Scan Disk",
+  "translatePage_diskScanErrorMessage": "StarCitizen.exe not found",
   "menu_title": "Menu",
   "menu_subtitle": "Menu allowing you to navigate between different pages.",
+  "menu_homePanel": "Home",
   "menu_featurePanel": "Features",
   "menu_featureCardTranslationTitle": "Translation",
   "menu_featureCardTranslationDescription": "Live translation, PTU, and other versions.",
@@ -15,14 +21,15 @@
   "menu_featureCardCustomDescription": "Customize your local translation",
   "menu_socialPanel": "Social",
   "menu_settingsPanel": "Settings",
-  
+  "diskSelector_title": "Select a Disk",
+  "diskSelector_menuTitle": "Select a disk ...",
+  "gameVersionSelector_title": "Select a Version",
+  "gameVersionSelector_menuTitle": "Select a version ...",
   "languageSelector_placeholder": "Select a language",
   "languageSelector_french": "Français",
   "languageSelector_english": "English",
   "languageSelector_spanish": "Español",
   "languageSelector_german": "Deutsch",
   "languageSelector_italian": "Italiano",
-  "languageSelector_russian": "Русский",
-
-  "test": "This is a test message, it is meant to test the software's translation system in different languages."
+  "languageSelector_russian": "Русский"
 }

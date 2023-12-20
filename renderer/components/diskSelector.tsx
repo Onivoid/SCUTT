@@ -20,14 +20,14 @@ export default function DiskSelector({disks, setSelectedDisk, isScanning}: {disk
   return disks ? (
     <SelectMenu
       closeOnSelect={true}
-      title="Sélectrionner une version"
+      title={t("diskSelector_title")}
       options={disks.map(
         (label) => ({ label, value: label })
       )}
       selected={selected}
       onSelect={(item) => {setSelected(item.value);diskHandler(item.value)}}
     >
-      <Button disabled={isScanning}>{selected || "Sélectionner une version ..."}</Button>
+      <Button disabled={isScanning}>{selected || t("diskSelector_menuTitle")}</Button>
     </SelectMenu>
   ) : (
     <Spinner size={24} className={Style.spinner} />

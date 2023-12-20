@@ -20,14 +20,14 @@ export default function GameVersionSelector({setGameVersion}) {
   return (
     <SelectMenu
       closeOnSelect={true}
-      title="Sélectrionner une version"
+      title={t("gameVersionSelector_title")}
       options={gameVersionList.map(
         (label) => ({ label, value: label })
       )}
       selected={selected}
       onSelect={(item) => {setSelected(item.value);gameVersionHandler(item.value)}}
     >
-      <Button>{selected || "Sélectionner une version ..."}</Button>
+      <Button>{selected || t("gameVersionSelector_menuTitle")}</Button>
     </SelectMenu>
   );
 }

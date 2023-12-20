@@ -79,20 +79,20 @@ export default function TranslatePage() {
         <title>{t("translatePage_title")}</title>
       </Head>
       <div className={Style.selectorContainer}>
-        <p>Version du jeu à traduire :</p>
+        <p>{t("translatePage_versionSelectionInstruction")}</p>
         <GameVersionSelector setGameVersion={setGameVersion} />
       </div>
       {gameVersion && !gameLocation ? 
         (
           <div className={Style.selectorContainer}>
-            <p>Choisissez le disque d'installation de Star Citizen :</p>
+            <p>{t("translatePage_diskSelectionInstruction")}</p>
             <DiskSelector disks={disks} setSelectedDisk={setSelectedDisk} isScanning={isScanning}/>
             {selectedDisk ? (
                 <Button isLoading={isScanning} onClick={() => setIsScanning(true)}>
-                  Scanner le disque {selectedDisk}
+                  {t("translatePage_diskScanButton")} {selectedDisk}
                 </Button>
               ) : null}
-            {scanningError ? (<p className={Style.errorMessage}>StarCitizen.exe introuvable</p>) : null}
+            {scanningError ? (<p className={Style.errorMessage}>{t("translatePage_diskScanErrorMessage")}</p>) : null}
           </div>
         ) : null
       }

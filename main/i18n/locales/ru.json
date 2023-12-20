@@ -2,8 +2,14 @@
   "runPage_title": "SCUTT - Запуск",
   "runPage_loadingMessage": "Запуск программного обеспечения ...",
   "homePage_title": "SCUTT - Главная",
+  "translatePage_title": "SCUTT - Перевод",
+  "translatePage_versionSelectionInstruction": "Версия игры для перевода:",
+  "translatePage_diskSelectionInstruction": "Выберите диск установки Star Citizen:",
+  "translatePage_diskScanButton": "Сканировать диск",
+  "translatePage_diskScanErrorMessage": "StarCitizen.exe не найден",
   "menu_title": "Меню",
   "menu_subtitle": "Меню, позволяющее вам переходить между разными страницами.",
+  "menu_homePanel": "Главная",
   "menu_featurePanel": "Характеристики",
   "menu_featureCardTranslationTitle": "Перевод",
   "menu_featureCardTranslationDescription": "Живой перевод, PTU и другие версии.",
@@ -15,14 +21,15 @@
   "menu_featureCardCustomDescription": "Настройте свой локальный перевод",
   "menu_socialPanel": "Социальное",
   "menu_settingsPanel": "Настройки",
-  
+  "diskSelector_title": "Выберите диск",
+  "diskSelector_menuTitle": "Выберите диск ...",
+  "gameVersionSelector_title": "Выберите версию",
+  "gameVersionSelector_menuTitle": "Выберите версию ...",
   "languageSelector_placeholder": "Выберите язык",
   "languageSelector_french": "Français",
   "languageSelector_english": "English",
   "languageSelector_spanish": "Español",
   "languageSelector_german": "Deutsch",
   "languageSelector_italian": "Italiano",
-  "languageSelector_russian": "Русский",
-
-  "test": "Это тестовое сообщение, предназначено для проверки системы перевода программного обеспечения на разных языках."
+  "languageSelector_russian": "Русский"
 }

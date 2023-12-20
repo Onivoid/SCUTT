@@ -4,8 +4,10 @@
 
   "homePage_title": "SCUTT - Accueil",
   "translatePage_title": "SCUTT - Traduction",
-
-  
+  "translatePage_versionSelectionInstruction": "Version du jeu à traduire :",
+  "translatePage_diskSelectionInstruction": "Choisissez le disque d'installation de Star Citizen :",
+  "translatePage_diskScanButton": "Scanner le disque",
+  "translatePage_diskScanErrorMessage": "StarCitizen.exe introuvable",
 
   "menu_title": "Menu",
   "menu_subtitle": "Menu vous permettant de naviguer entre les différentes pages.",
@@ -21,14 +23,17 @@
   "menu_featureCardCustomDescription": "Personnaliser votre traduction local",
   "menu_socialPanel": "Social",
   "menu_settingsPanel": "Paramètres",
-  
+
+  "diskSelector_title": "Sélectionner un disque",
+  "diskSelector_menuTitle": "Sélectionner un disque ...",
+  "gameVersionSelector_title": "Sélectionner une version",
+  "gameVersionSelector_menuTitle": "Sélectionner une version ...",
+
   "languageSelector_placeholder": "Choisissez une langue",
   "languageSelector_french": "Français",
   "languageSelector_english": "English",
   "languageSelector_spanish": "Español",
   "languageSelector_german": "Deutsch",
   "languageSelector_italian": "Italiano",
-  "languageSelector_russian": "Русский",
-
-  "test": "Ceci est un message de test, il consiste à tester le système de traduction du logiciel dans différentes langues."
+  "languageSelector_russian": "Русский"
 }
