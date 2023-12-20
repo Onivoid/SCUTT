@@ -1,0 +1,8 @@
+.container{
+  background-color: var(--foreground-color);
+  height: 15px;
+  width: 65%;
+}
+.progress{
+  background-color: var(--accent-color);
+}

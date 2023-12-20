@@ -1,0 +1,28 @@
+{
+  "runPage_title": "SCUTT - Avvio",
+  "runPage_loadingMessage": "Avvio del software ...",
+  "homePage_title": "SCUTT - Home",
+  "menu_title": "Menu",
+  "menu_subtitle": "Menu che ti permette di navigare tra diverse pagine.",
+  "menu_featurePanel": "Funzionalità",
+  "menu_featureCardTranslationTitle": "Traduzione",
+  "menu_featureCardTranslationDescription": "Traduzione live, PTU e altre versioni.",
+  "menu_featureCardContributeTitle": "Contribuisci",
+  "menu_featureCardContributeDescription": "Contribuisci alla tua traduzione locale",
+  "menu_featureCardDownloadTitle": "Global.ini",
+  "menu_featureCardDownloadDescription": "Scarica il global.ini della tua traduzione locale",
+  "menu_featureCardCustomTitle": "Traduzione Personalizzata",
+  "menu_featureCardCustomDescription": "Personalizza la tua traduzione locale",
+  "menu_socialPanel": "Sociale",
+  "menu_settingsPanel": "Impostazioni",
+  
+  "languageSelector_placeholder": "Seleziona una lingua",
+  "languageSelector_french": "Français",
+  "languageSelector_english": "English",
+  "languageSelector_spanish": "Español",
+  "languageSelector_german": "Deutsch",
+  "languageSelector_italian": "Italiano",
+  "languageSelector_russian": "Русский",
+
+  "test": "Questo è un messaggio di prova, serve per testare il sistema di traduzione del software in diverse lingue."
+}

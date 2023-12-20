@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@200;400;700&family=Noto+Color+Emoji&display=swap');
+
+:root{
+  --background-color: #1f233a;
+  --foreground-color: #F9FAFC;
+  --accent-color: #85A3FF;
+  --success-color: #52BD95;
+  --warning-color: #FFB020;
+  --error-color: #D14343;
+}

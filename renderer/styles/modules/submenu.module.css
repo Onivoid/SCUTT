@@ -1,0 +1,10 @@
+.card{
+  transition: all 0.1s ease-in-out;
+}
+.card:hover{
+  background-color: var(--accent-color);
+  cursor: pointer;
+}
+.card:hover *{
+  color: var(--foreground-color);
+}

@@ -1,0 +1,42 @@
+.container{
+  max-height: 100vh;
+  overflow-y: scroll;
+  padding: 100px 25px 0 25px;
+}
+
+.logo{
+  display: flex;
+  gap: 10px;
+}
+
+.controlBar{
+  position: fixed;
+  top: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: calc(100% - 50px);
+  gap: 5px;
+}
+
+.iconContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.move{
+  color: var(--accent-color);
+}
+
+.close{
+  color: var(--error-color);
+  transition: all 0.2s ease-in-out;
+}
+
+.close:hover{
+  cursor: pointer;
+  transform: scale(1.2);
+  filter: brightness(1.5);
+}

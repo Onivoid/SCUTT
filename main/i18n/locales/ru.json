@@ -1,0 +1,28 @@
+{
+  "runPage_title": "SCUTT - Запуск",
+  "runPage_loadingMessage": "Запуск программного обеспечения ...",
+  "homePage_title": "SCUTT - Главная",
+  "menu_title": "Меню",
+  "menu_subtitle": "Меню, позволяющее вам переходить между разными страницами.",
+  "menu_featurePanel": "Характеристики",
+  "menu_featureCardTranslationTitle": "Перевод",
+  "menu_featureCardTranslationDescription": "Живой перевод, PTU и другие версии.",
+  "menu_featureCardContributeTitle": "Внести вклад",
+  "menu_featureCardContributeDescription": "Внесите свой вклад в ваш местный перевод",
+  "menu_featureCardDownloadTitle": "Global.ini",
+  "menu_featureCardDownloadDescription": "Загрузите global.ini вашего локального перевода",
+  "menu_featureCardCustomTitle": "Настройка перевода",
+  "menu_featureCardCustomDescription": "Настройте свой локальный перевод",
+  "menu_socialPanel": "Социальное",
+  "menu_settingsPanel": "Настройки",
+  
+  "languageSelector_placeholder": "Выберите язык",
+  "languageSelector_french": "Français",
+  "languageSelector_english": "English",
+  "languageSelector_spanish": "Español",
+  "languageSelector_german": "Deutsch",
+  "languageSelector_italian": "Italiano",
+  "languageSelector_russian": "Русский",
+
+  "test": "Это тестовое сообщение, предназначено для проверки системы перевода программного обеспечения на разных языках."
+}
