@@ -21,7 +21,7 @@ i18n
       ru: { translation: ruTranslation },
       // ... autres langues
     },
-    lng: "en", // langue initiale
+    lng: "fr", // langue initiale
     fallbackLng: "en",
     interpolation: {
       escapeValue: false

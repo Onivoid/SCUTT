@@ -1,38 +1,52 @@
-import React, { useState, useEffect } from 'react';
-import { Pane, Heading, Paragraph, Card, Button } from 'evergreen-ui'
+import React, { useEffect } from 'react';
+import { Pane, Heading, Paragraph, Card } from 'evergreen-ui'
 import { useTranslation } from 'react-i18next'
 import { useLanguage } from '../components/languageContext'
 import Style from '../styles/modules/submenu.module.css'
+import Link from 'next/link';
 
-export default function SubMenu({ index }) {
+export default function SubMenu({ index, setIsShown }) {
   const { t, i18n } = useTranslation();
   const { language } = useLanguage();
+
+  const CloseMenu = () => {
+    setIsShown(false);
+    console.log("close");
+  };
 
   useEffect(() => {
     i18n.changeLanguage(language);
   }, [language, i18n]);
+
   if (index === 0) {
     return (
       <Pane 
         display="grid"
         gridTemplateColumns="repeat(2, minmax(240px, 1fr))"
+        gridTemplateRows="240px"
         gap={10}
-        overflowY="scroll" 
-        background="blueTint" 
+        overflowY="scroll"  
+        backgroundColor="var(--background-color-variant)"
+        height="100%"
         padding={16}>
+        <Link href="/translate">
+          <Card
+            onClick={CloseMenu}
+            className={Style.card}
+            backgroundColor="white"
+            elevation={0}
+            height={240}
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Heading>{t("menu_featureCardTranslationTitle")}</Heading>
+            <Paragraph textAlign="center">{t("menu_featureCardTranslationDescription")}</Paragraph>
+          </Card>
+        </Link>
         <Card
-          className={Style.card}
-          backgroundColor="white"
-          elevation={0}
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Heading>{t("menu_featureCardTranslationTitle")}</Heading>
-          <Paragraph textAlign="center">{t("menu_featureCardTranslationDescription")}</Paragraph>
-        </Card>
-        <Card
+          onClick={CloseMenu}
           className={Style.card}
           backgroundColor="white"
           elevation={0}
@@ -46,6 +60,7 @@ export default function SubMenu({ index }) {
           <Paragraph textAlign="center">{t("menu_featureCardContributeDescription")}</Paragraph>
         </Card>
         <Card
+          onClick={CloseMenu}
           className={Style.card}
           backgroundColor="white"
           elevation={0}
@@ -59,6 +74,7 @@ export default function SubMenu({ index }) {
           <Paragraph textAlign="center">{t("menu_featureCardDownloadDescription")}</Paragraph>
         </Card>
         <Card
+          onClick={CloseMenu}
           className={Style.card}
           backgroundColor="white"
           elevation={0}
@@ -75,8 +91,9 @@ export default function SubMenu({ index }) {
     );
   } else if (index === 1) {
     return (
-      <Pane flex="1" overflowY="scroll" background="tint1" padding={16}>
+      <Pane flex="1" overflowY="scroll" backgroundColor="var(--background-color-variant)" padding={16}>
         <Card
+          onClick={CloseMenu}
           backgroundColor="white"
           elevation={0}
           height={240}
@@ -90,8 +107,9 @@ export default function SubMenu({ index }) {
     );
   } else if (index === 2) {
     return (
-      <Pane flex="1" overflowY="scroll" background="tint1" padding={16}>
+      <Pane flex="1" overflowY="scroll" backgroundColor="var(--background-color-variant)" padding={16}>
         <Card
+          onClick={CloseMenu}
           backgroundColor="white"
           elevation={0}
           height={240}

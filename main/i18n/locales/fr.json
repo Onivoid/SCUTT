@@ -3,9 +3,13 @@
   "runPage_loadingMessage": "Lancement du logiciel ...",
 
   "homePage_title": "SCUTT - Accueil",
+  "translatePage_title": "SCUTT - Traduction",
+
+  
 
   "menu_title": "Menu",
   "menu_subtitle": "Menu vous permettant de naviguer entre les différentes pages.",
+  "menu_homePanel": "Accueil",
   "menu_featurePanel": "Fonctionnalités",
   "menu_featureCardTranslationTitle": "Traduction",
   "menu_featureCardTranslationDescription": "Traduction Live, PTU et autres versions.",
