@@ -31,5 +31,13 @@
   "languageSelector_spanish": "Español",
   "languageSelector_german": "Deutsch",
   "languageSelector_italian": "Italiano",
-  "languageSelector_russian": "Русский"
+  "languageSelector_russian": "Русский",
+  "translatePage_gameLocation": "Game Location",
+  "translatePage_gameLocationDisclaimer": "Make sure you have only one installation of Star Citizen on your computer.",
+  "translatePage_translationStatus": "Translation Status",
+  "translatePage_translationStatusChecking": "Checking ...",
+  "translatePage_translationStatusInstalled": "Translation Installed",
+  "translatePage_translationStatusNotInstalled": "Translation Not Installed",
+  "translatePage_translationActionInstall": "Install Translation",
+  "translatePage_translationActionUninstall": "Uninstall Translation"
 }

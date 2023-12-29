@@ -18,7 +18,6 @@ export default async () => {
           .slice(1, -1)
           .map(drive => drive.trim())
           .filter(drive => drive !== '');
-        console.log(driveList);
         resolve(driveList);
       });
     });

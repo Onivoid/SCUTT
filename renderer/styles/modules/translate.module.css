@@ -1,10 +1,48 @@
+.translationPageContainer{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 .selectorContainer{
   display: flex;
   align-items: center;
-  gap: 20px
+  gap: 20px;
 }
 .errorMessage{
   color: var(--error-color);
   font-size: 0.8rem;
   font-style: italic;
+}
+.gameLocationContainer{
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.translationStatusContainer{
+  display: flex;
+  gap: 5px;
+  position: relative;
+}
+.translationStatus{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.translationCheckingStatus{
+  animation: checking 1s infinite linear;
+  color: var(--warning-color);
+}
+.translationInstalledStatus{
+  color: var(--success-color);
+}
+.translationNotInstalledStatus{
+  color: var(--error-color);
+}
+@keyframes checking {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
 }

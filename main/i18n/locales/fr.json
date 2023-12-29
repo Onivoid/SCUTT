@@ -29,6 +29,15 @@
   "gameVersionSelector_title": "Sélectionner une version",
   "gameVersionSelector_menuTitle": "Sélectionner une version ...",
 
+  "translatePage_gameLocation": "Emplacement du jeu",
+  "translatePage_gameLocationDisclaimer": "Vérifiez que vous n'avez qu'une seule installation de Star Citizen sur votre ordinateur.",
+  "translatePage_translationStatus": "Statut de la traduction",
+  "translatePage_translationStatusChecking": "Vérification ...",
+  "translatePage_translationStatusInstalled": "Traduction installée",
+  "translatePage_translationStatusNotInstalled": "Traduction non installée",
+  "translatePage_translationActionInstall": "Installer la traduction",
+  "translatePage_translationActionUninstall": "Désinstaller la traduction",
+
   "languageSelector_placeholder": "Choisissez une langue",
   "languageSelector_french": "Français",
   "languageSelector_english": "English",

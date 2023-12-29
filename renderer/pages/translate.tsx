@@ -7,6 +7,7 @@ import UserPreferences from '../../main/database/class/UserPreferences'
 import GameVersionSelector from '../components/gameVersionSelector'
 import DiskSelector from '../components/diskSelector'
 import { Button } from 'evergreen-ui'
+import { Loader2, Check, X } from 'lucide-react'
 
 
 export default function TranslatePage() {
@@ -19,6 +20,7 @@ export default function TranslatePage() {
   const [selectedDisk, setSelectedDisk] = useState<string>(null);
   const [isScanning, setIsScanning] = useState<boolean>(false);
   const [scanningError, setScanningError] = useState<boolean>(false);
+  const [translationStatus, setTranslationStatus] = useState<boolean>(null);
 
   const existingGamePaths = {
     "GamePathLive": (data: UserPreferences) => {
@@ -37,6 +39,12 @@ export default function TranslatePage() {
 
   useEffect(() => {
     i18n.changeLanguage(language);
+    
+    if (gameLocation != null) {
+      window.ipc.invoke("check-translation-status", {localisation: `${gameLocation}\\StarCitizen\\${gameVersion.toLocaleUpperCase()}`, lang: i18n.language}).then(async (result) => {
+        setTranslationStatus(result);
+      });
+    }
   }, [language, i18n]);
 
   useEffect(() => {
@@ -49,10 +57,16 @@ export default function TranslatePage() {
     window.ipc.invoke("get-user-preferences").then(async (result: UserPreferences) => {
       await setUserPreferences(result);
     });
+    if (gameLocation != null) {
+      window.ipc.invoke("check-translation-status", {localisation: `${gameLocation}\\StarCitizen\\${gameVersion.toLocaleUpperCase()}`, lang: i18n.language}).then(async (result) => {
+        setTranslationStatus(result);
+      });
+    }
   }, [gameLocation]);
 
   useEffect(() => {
     setGameLocation(null);
+    setTranslationStatus(null);
     const existingGamePathsHandler = existingGamePaths[`GamePath${gameVersion}`];
     if (existingGamePathsHandler) {
       existingGamePathsHandler(userPreferences);
@@ -74,7 +88,7 @@ export default function TranslatePage() {
   }, [isScanning])
 
   return (
-    <React.Fragment>
+    <div className={Style.translationPageContainer}>
       <Head>
         <title>{t("translatePage_title")}</title>
       </Head>
@@ -96,6 +110,32 @@ export default function TranslatePage() {
           </div>
         ) : null
       }
-    </React.Fragment>
+      {gameVersion && gameLocation ? (
+        <React.Fragment>
+          <div className={Style.gameLocationContainer}>
+            <p>{t("translatePage_gameLocation")} : {gameLocation}</p>
+            <p>{t("translatePage_gameLocationDisclaimer")}</p>
+          </div>
+          <div className={Style.translationStatusContainer}>
+            <p>{t("translatePage_translationStatus")} :</p>
+            <p>{ translationStatus === null 
+              ? (<span className={Style.translationStatus}>{t("translatePage_translationStatusChecking")} <Loader2 className={Style.translationCheckingStatus} size={18} /></span>) 
+              : translationStatus 
+                ? (<span className={Style.translationStatus}>{t("translatePage_translationStatusInstalled")} <Check className={Style.translationInstalledStatus} size={18} /></span>) 
+                : (<span className={Style.translationStatus}>{t("translatePage_translationStatusNotInstalled")} <X className={Style.translationNotInstalledStatus} size={18} /></span>)}
+            </p>
+          </div>
+          <div className={Style.translationActionsContainer}>
+            {
+              translationStatus === null 
+              ? null
+              : translationStatus 
+                ? (<Button>{t("translatePage_translationActionUninstall")}</Button>) 
+                : (<Button>{t("translatePage_translationActionInstall")}</Button>)
+            }
+          </div>
+        </React.Fragment>
+      ) : null}
+    </div>
   )
 }
