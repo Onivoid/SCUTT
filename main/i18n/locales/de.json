@@ -39,5 +39,6 @@
   "translatePage_translationStatusInstalled": "Übersetzung installiert",
   "translatePage_translationStatusNotInstalled": "Übersetzung nicht installiert",
   "translatePage_translationActionInstall": "Übersetzung installieren",
-  "translatePage_translationActionUninstall": "Übersetzung deinstallieren"
+  "translatePage_translationActionUninstall": "Übersetzung deinstallieren",
+  "translatePage_translationDisabled": "Übersetzung in Ihrer Sprache derzeit nicht verfügbar."
 }

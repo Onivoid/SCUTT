@@ -31,7 +31,7 @@ export async function setupWindowEvents(){
   } else {
     const port = process.argv[2]
     await mainWindow.loadURL(`http://localhost:${port}/run`)
-    //mainWindow.webContents.openDevTools()
+    mainWindow.webContents.openDevTools()
   }
 
   app.on('window-all-closed', () => {

@@ -39,5 +39,6 @@
   "translatePage_translationStatusInstalled": "Traducción Instalada",
   "translatePage_translationStatusNotInstalled": "Traducción No Instalada",
   "translatePage_translationActionInstall": "Instalar Traducción",
-  "translatePage_translationActionUninstall": "Desinstalar Traducción"
+  "translatePage_translationActionUninstall": "Desinstalar Traducción",
+  "translatePage_translationDisabled": "Traducción no disponible en su idioma en este momento."
 }

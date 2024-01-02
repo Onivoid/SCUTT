@@ -1,8 +1,32 @@
 {
-  "fr": "french_(france)",
-  "de": "german_(germany)",
-  "ita": "italian_(italy)",
-  "es": "spanish_(spain)",
-  "ru": "russian_(russia)",
-  "en": "english"
+  "fr": {
+    "folder": "french_(france)",
+    "enabled": true,
+    "link": "https://raw.githubusercontent.com/SPEED0U/Scefra/main/french_(france)/global.ini"
+  },
+  "de": {
+    "folder": "german_(germany)",
+    "enabled": true,
+    "link": "https://raw.githubusercontent.com/Dymerz/StarCitizen-Localization/main/data/Localization/german_(germany)/global.ini"
+  },
+  "ita": {
+    "folder": "italian_(italy)",
+    "enabled": true,
+    "link": "https://raw.githubusercontent.com/Dymerz/StarCitizen-Localization/main/data/Localization/italian_(italy)/global.ini"
+  },
+  "es": {
+    "folder": "spanish_(spain)",
+    "enabled": true,
+    "link": "https://raw.githubusercontent.com/Dymerz/StarCitizen-Localization/main/data/Localization/spanish_(spain)/global.ini"
+  },
+  "ru": {
+    "folder": "russian_(russia)",
+    "enabled": false,
+    "link": ""
+  },
+  "en": {
+    "folder": "english",
+    "enabled": false,
+    "link": ""
+  }
 } 

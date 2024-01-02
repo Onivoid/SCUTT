@@ -21,6 +21,9 @@ export default function TranslatePage() {
   const [isScanning, setIsScanning] = useState<boolean>(false);
   const [scanningError, setScanningError] = useState<boolean>(false);
   const [translationStatus, setTranslationStatus] = useState<boolean>(null);
+  const [translationEnabled, setTranslationEnabled] = useState<boolean>(false);
+  const [translationLink, setTranslationLink] = useState<string>(null);
+  const [translationUpdate, setTranslationUpdate] = useState<boolean>(false);
 
   const existingGamePaths = {
     "GamePathLive": (data: UserPreferences) => {
@@ -37,12 +40,28 @@ export default function TranslatePage() {
     },
   }
 
+  const installHandler = () => {
+    window.ipc.invoke("install-translation", {localisation: `${gameLocation}\\StarCitizen\\${gameVersion.toLocaleUpperCase()}`, lang: i18n.language}).then(async (result) => {
+      setTranslationStatus(true);
+      setTranslationUpdate(false);
+    });
+  };
+
+  const uninstallHandler = () => {
+    window.ipc.invoke("uninstall-translation", {localisation: `${gameLocation}\\StarCitizen\\${gameVersion.toLocaleUpperCase()}`}).then(async (result) => {
+      setTranslationStatus(false);
+    });
+  };
+
   useEffect(() => {
     i18n.changeLanguage(language);
     
     if (gameLocation != null) {
       window.ipc.invoke("check-translation-status", {localisation: `${gameLocation}\\StarCitizen\\${gameVersion.toLocaleUpperCase()}`, lang: i18n.language}).then(async (result) => {
-        setTranslationStatus(result);
+        const {enabled, response, link} = result;
+        setTranslationStatus(response);
+        setTranslationEnabled(enabled);
+        setTranslationLink(link);
       });
     }
   }, [language, i18n]);
@@ -59,14 +78,17 @@ export default function TranslatePage() {
     });
     if (gameLocation != null) {
       window.ipc.invoke("check-translation-status", {localisation: `${gameLocation}\\StarCitizen\\${gameVersion.toLocaleUpperCase()}`, lang: i18n.language}).then(async (result) => {
-        setTranslationStatus(result);
+        const {enabled, response, link} = result;
+        setTranslationStatus(response);
+        setTranslationEnabled(enabled);
+        setTranslationLink(link);
       });
     }
   }, [gameLocation]);
 
   useEffect(() => {
     setGameLocation(null);
-    setTranslationStatus(null);
+    setTranslationStatus(false);
     const existingGamePathsHandler = existingGamePaths[`GamePath${gameVersion}`];
     if (existingGamePathsHandler) {
       existingGamePathsHandler(userPreferences);
@@ -85,7 +107,16 @@ export default function TranslatePage() {
       }
       setIsScanning(false);
     }) : null;
-  }, [isScanning])
+  }, [isScanning]);
+
+  useEffect(() => {
+    if (translationStatus) {
+      window.ipc.invoke("check-translation-update", {localisation: `${gameLocation}\\StarCitizen\\${gameVersion.toLocaleUpperCase()}`, lang: i18n.language}).then(async (result) => {
+        setTranslationUpdate(!result);
+        console.log(!result);
+      });
+    }
+  }, [translationStatus]);
 
   return (
     <div className={Style.translationPageContainer}>
@@ -103,7 +134,7 @@ export default function TranslatePage() {
             <DiskSelector disks={disks} setSelectedDisk={setSelectedDisk} isScanning={isScanning}/>
             {selectedDisk ? (
                 <Button isLoading={isScanning} onClick={() => setIsScanning(true)}>
-                  {t("translatePage_diskScanButton")} {selectedDisk}
+                  {isScanning ? t("translatePage_diskScanning") : t("translatePage_diskScanButton")} {isScanning ? null : selectedDisk}
                 </Button>
               ) : null}
             {scanningError ? (<p className={Style.errorMessage}>{t("translatePage_diskScanErrorMessage")}</p>) : null}
@@ -130,8 +161,15 @@ export default function TranslatePage() {
               translationStatus === null 
               ? null
               : translationStatus 
-                ? (<Button>{t("translatePage_translationActionUninstall")}</Button>) 
-                : (<Button>{t("translatePage_translationActionInstall")}</Button>)
+                ? (
+                    <React.Fragment>
+                      <Button onClick={uninstallHandler}>{t("translatePage_translationActionUninstall")}</Button>
+                      {translationUpdate ? (<Button onClick={installHandler}>{t("translatePage_translationActionUpdate")}</Button>) : null}
+                    </React.Fragment>
+                  ) 
+                : translationEnabled 
+                  ? (<Button onClick={installHandler}>{t("translatePage_translationActionInstall")}</Button>)
+                  : (<Button disabled={true}>{t("translatePage_translationDisabled")}</Button>)
             }
           </div>
         </React.Fragment>

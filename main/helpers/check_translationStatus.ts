@@ -5,13 +5,17 @@ const translationsFolders = require("../../main/helpers/translationsFolders.json
 export default async function checkTranslationStatus(localisation: string, lang: string) {
   return new Promise((resolve, reject) => {
     const userCfgPath = path.join(localisation, "user.cfg");
-    const LocalizationDir = path.join(localisation, "data", "Localization", translationsFolders[lang]);
+    const LocalizationDir = path.join(localisation, "data", "Localization", translationsFolders[lang].folder);
     const globalIniPath = path.join(LocalizationDir, "global.ini");
 
     if (!fs.existsSync(userCfgPath) || !fs.existsSync(LocalizationDir) || !fs.existsSync(globalIniPath)) {
-      resolve(false);
+      resolve({enabled: translationsFolders[lang].enabled, response: false, link: translationsFolders[lang].link});
     } else {
-      resolve(true);
+      if(!translationsFolders[lang].enabled){
+        resolve({enabled: translationsFolders[lang].enabled, response: true, link: translationsFolders[lang].link});
+      } else {
+        resolve({enabled: translationsFolders[lang].enabled, response: true, link: translationsFolders[lang].link});
+      }
     }
   });
 }
