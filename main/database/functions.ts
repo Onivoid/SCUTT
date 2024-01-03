@@ -10,43 +10,48 @@ const createDB = async () => {
   const userDataPath = app.getPath('userData');
   const dbPath = path.join(userDataPath, 'database.db');
 
-  db = new sqlite3.Database(dbPath, async (err) => {
-    if (err) {
-      logger.error('Erreur lors de l\'ouverture de la base de données :', err.message);
-    } else {
-      db.run(`
-        CREATE TABLE IF NOT EXISTS UserPreferences (
-          id INTEGER PRIMARY KEY,
-          GamePathLive TEXT DEFAULT NULL,
-          GamePathPtu TEXT DEFAULT NULL,
-          GamePathEptu TEXT DEFAULT NULL,
-          GamePathTechPreview TEXT DEFAULT NULL,
-          lastUpdate DATETIME DEFAULT NULL,
-          UiPreferences TEXT DEFAULT NULL
-        )
-      `);
+  return new Promise((resolve, reject) => {
+    db = new sqlite3.Database(dbPath, async (err) => {
+      if (err) {
+        logger.error('Erreur lors de l\'ouverture de la base de données :', err.message);
+      } else {
+        db.run(`
+          CREATE TABLE IF NOT EXISTS UserPreferences (
+            id INTEGER PRIMARY KEY,
+            GamePathLive TEXT DEFAULT NULL,
+            GamePathPtu TEXT DEFAULT NULL,
+            GamePathEptu TEXT DEFAULT NULL,
+            GamePathTechPreview TEXT DEFAULT NULL,
+            lastUpdate DATETIME DEFAULT NULL,
+            UiPreferences TEXT DEFAULT NULL
+          )
+        `);
 
-      const checkQuery = 'SELECT * FROM UserPreferences WHERE id = 1';
-      db.get(checkQuery, async (err, row) => {
-        if (err) {
-          logger.error('Erreur lors de la vérification de l\'entrée UserPreferences :', err.message);
-        } else if (!row) {
-          const insertQuery = `
-            INSERT INTO UserPreferences (id, GamePathLive, GamePathPtu, GamePathEptu, GamePathTechPreview, lastUpdate, UiPreferences)
-            VALUES (1, NULL, NULL, NULL, NULL, NULL, NULL)
-          `;
-          db.run(insertQuery, (err) => {
-            if (err) {
-              logger.error('Erreur lors de l\'insertion des préférences par défaut :', err.message);
-            } else {
-              logger.info('Entrée UserPreferences avec id = 1 créée avec des valeurs par défaut.');
-            }
-          });
-        }
-      });
-    }
+        const checkQuery = 'SELECT * FROM UserPreferences WHERE id = 1';
+        db.get(checkQuery, async (err, row) => {
+          if (err) {
+            logger.error('Erreur lors de la vérification de l\'entrée UserPreferences :', err.message);
+            reject(false); 
+          } else if (!row) {
+            resolve(true);
+            const insertQuery = `
+              INSERT INTO UserPreferences (id, GamePathLive, GamePathPtu, GamePathEptu, GamePathTechPreview, lastUpdate, UiPreferences)
+              VALUES (1, NULL, NULL, NULL, NULL, NULL, NULL)
+            `;
+            db.run(insertQuery, (err) => {
+              if (err) {
+                logger.error('Erreur lors de l\'insertion des préférences par défaut :', err.message);
+              } else {
+                logger.info('Entrée UserPreferences avec id = 1 créée avec des valeurs par défaut.');
+              }
+            });
+          } else {
+            resolve(true);
+          }
+        });
+      }
+    });
   });
-  return;
 };
 
 const updateUserPreferences = (data: UserPreferences) => {

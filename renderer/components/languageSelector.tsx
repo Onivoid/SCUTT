@@ -35,12 +35,6 @@ export default function LanguageSelector() {
       value: "ita",
       icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Flag_of_Italy.svg/800px-Flag_of_Italy.svg.png",
     },
-    {
-      label: "languageSelector_russian",
-      value: "ru",
-      icon: "https://upload.wikimedia.org/wikipedia/en/thumb/f/f3/Flag_of_Russia.svg/800px-Flag_of_Russia.svg.png?20120812153731",
-    },
-    // Ajoutez plus de langues ici
   ];
 
   useEffect(() => {
@@ -48,7 +42,6 @@ export default function LanguageSelector() {
     changeLanguage(language);
   }, [language, i18n]);
 
-  // Mise à jour du label sélectionné en fonction de la langue actuelle
   useEffect(() => {
     const currentLanguageOption = languageOptions.find(option => option.value === language);
     if (currentLanguageOption) {

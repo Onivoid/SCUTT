@@ -7,6 +7,7 @@ import { AlignJustify, Home } from 'lucide-react';
 import Style from '../styles/modules/menu.module.css'
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { motion } from 'framer-motion'
 
 export default function Menu() {
   const { t, i18n } = useTranslation();
@@ -62,9 +63,11 @@ export default function Menu() {
         </Pane>
         <SubMenu index={selectedIndex} setIsShown={setIsShown}/>
       </SideSheet>
-      <Button onClick={() => setIsShown(true)} className={Style.button}>
-        <AlignJustify size={16}/>
-      </Button>
+      <motion.span initial={{opacity: 0, y:20}} animate={{opacity: 1, y:0}} transition={{duration: 0.5}} className={Style.button} >
+        <Button onClick={() => setIsShown(true)}>
+          <AlignJustify size={16}/>
+        </Button>
+      </motion.span>
     </React.Fragment>
   )
 }

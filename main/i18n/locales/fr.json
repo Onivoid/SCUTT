@@ -1,4 +1,7 @@
 {
+  "creator_placeholder": "Logan Wilquin | Onivoid",
+  "donation_button": "Faire un don",
+
   "runPage_title": "SCUTT - Lancement",
   "runPage_loadingMessage": "Lancement du logiciel ...",
 
@@ -9,6 +12,11 @@
   "translatePage_diskScanButton": "Scanner le disque",
   "translatePage_diskScanning": "Scan en cours ...",
   "translatePage_diskScanErrorMessage": "StarCitizen.exe introuvable",
+
+  "homePage_welcome": "Bienvenue sur SCUTT",
+  "homePage_description": "Logiciel permettant de traduire Star Citizen dans votre langue !",
+  "homePage_creatorText": "Développé par : ",
+
 
   "menu_title": "Menu",
   "menu_subtitle": "Menu vous permettant de naviguer entre les différentes pages.",
@@ -22,7 +30,10 @@
   "menu_featureCardDownloadDescription": "Télécharger le global.ini de votre traduction locale",
   "menu_featureCardCustomTitle": "Traduction Personnalisée",
   "menu_featureCardCustomDescription": "Personnaliser votre traduction local",
+  "menu_featureSoon": "Bientôt disponible !",
   "menu_socialPanel": "Social",
+  "menu_socialDiscord": "Discord",
+  "menu_socialDiscordDescription": "Rejoindre la communauté SCUTT !",
   "menu_settingsPanel": "Paramètres",
 
   "diskSelector_title": "Sélectionner un disque",
@@ -34,10 +45,11 @@
   "translatePage_gameLocationDisclaimer": "Vérifiez que vous n'avez qu'une seule installation de Star Citizen sur votre ordinateur.",
   "translatePage_translationStatus": "Statut de la traduction",
   "translatePage_translationStatusChecking": "Vérification ...",
-  "translatePage_translationStatusInstalled": "Traduction installée",
-  "translatePage_translationStatusNotInstalled": "Traduction non installée",
+  "translatePage_translationStatusInstalled": "Installée",
+  "translatePage_translationStatusNotInstalled": "Non installée",
   "translatePage_translationActionInstall": "Installer la traduction",
-  "translatePage_translationActionUpdate": "Mettre à jour la traduction",
+  "translatePage_translationActionUpdateTrue": "Mise à jour disponible",
+  "translatePage_translationActionUpdateFalse": "Aucunes mises à jour disponibles",
   "translatePage_translationActionUninstall": "Désinstaller la traduction",
   "translatePage_translationDisabled": "Traduction indisponible dans votre langue pour le moment.",
 

@@ -13,7 +13,11 @@ publish: null
 
 win:
   target: ["AppX"]
-  icon: "build/icons/icon.ico"
+  icon: "resources/icon.ico"
+  extraResources: [
+    "resources/app.manifest"
+  ]
+  requestedExecutionLevel: "requireAdministrator"
 
 appx:
   applicationId: "Onivoid.SCUTTStarCitizenUniversalTranslation"

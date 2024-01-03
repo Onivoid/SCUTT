@@ -1,2 +1,26 @@
 .container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  gap: 10px;
+  text-align: center;
+}
+.titleContainer{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.title{
+  color: var(--accent-color);
+}
+.subtitle{
+  font-style: italic;
+}
+.creatorPlaceholder{
+  color: var(--variant-color);
+}
+.socialLink:hover{
+  cursor: pointer;
 }

@@ -4,7 +4,8 @@
   --background-color: #2c2c54;
   --background-color-variant: #40407a;
   --foreground-color: #F9FAFC;
-  --foreground-color-variant: #e0e1e2;
+  --foreground-color-variant: #cccccc;
+  --disabled-color: #969696;
   --accent-color: #8d8cdf;
   --variant-color: #ff793f;
   --success-color: #52BD95;

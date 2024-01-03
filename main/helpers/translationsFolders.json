@@ -19,11 +19,6 @@
     "enabled": true,
     "link": "https://raw.githubusercontent.com/Dymerz/StarCitizen-Localization/main/data/Localization/spanish_(spain)/global.ini"
   },
-  "ru": {
-    "folder": "russian_(russia)",
-    "enabled": false,
-    "link": ""
-  },
   "en": {
     "folder": "english",
     "enabled": false,

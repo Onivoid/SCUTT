@@ -1,5 +1,5 @@
 import path from 'path'
-import { BrowserWindow, app, ipcMain } from 'electron';
+import { BrowserWindow, app, ipcMain, shell } from 'electron';
 import serve from 'electron-serve'
 import { createWindow } from '../helpers'
 
@@ -15,7 +15,10 @@ const { createDB } = require('../database/functions');
 
 export async function setupWindowEvents(){
   
-  await createDB();
+  await createDB().catch(async () => {
+    //Fix de Bourrin
+    await createDB();
+  });
 
   const mainWindow = createWindow('main', {
     width: 300,
@@ -28,10 +31,9 @@ export async function setupWindowEvents(){
   mainWindow.center();
   if (isProd) {
     await mainWindow.loadURL('app://./run')
-  } else {
+  } else { 
     const port = process.argv[2]
     await mainWindow.loadURL(`http://localhost:${port}/run`)
-    mainWindow.webContents.openDevTools()
   }
 
   app.on('window-all-closed', () => {

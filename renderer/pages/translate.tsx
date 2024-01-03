@@ -7,7 +7,8 @@ import UserPreferences from '../../main/database/class/UserPreferences'
 import GameVersionSelector from '../components/gameVersionSelector'
 import DiskSelector from '../components/diskSelector'
 import { Button } from 'evergreen-ui'
-import { Loader2, Check, X } from 'lucide-react'
+import { Loader2, Check, X, AlertTriangle } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion';
 
 
 export default function TranslatePage() {
@@ -119,17 +120,18 @@ export default function TranslatePage() {
   }, [translationStatus]);
 
   return (
+    <AnimatePresence>
     <div className={Style.translationPageContainer}>
       <Head>
         <title>{t("translatePage_title")}</title>
       </Head>
-      <div className={Style.selectorContainer}>
+      <motion.div initial={{opacity: 0, y:20}} animate={{opacity: 1, y:0}} transition={{duration: 0.5}} className={Style.selectorContainer}>
         <p>{t("translatePage_versionSelectionInstruction")}</p>
         <GameVersionSelector setGameVersion={setGameVersion} />
-      </div>
+      </motion.div>
       {gameVersion && !gameLocation ? 
         (
-          <div className={Style.selectorContainer}>
+          <motion.div initial={{opacity: 0, y:20}} animate={{opacity: 1, y:0}} transition={{duration: 0.5}} className={Style.selectorContainer}>
             <p>{t("translatePage_diskSelectionInstruction")}</p>
             <DiskSelector disks={disks} setSelectedDisk={setSelectedDisk} isScanning={isScanning}/>
             {selectedDisk ? (
@@ -138,42 +140,55 @@ export default function TranslatePage() {
                 </Button>
               ) : null}
             {scanningError ? (<p className={Style.errorMessage}>{t("translatePage_diskScanErrorMessage")}</p>) : null}
-          </div>
+          </motion.div>
         ) : null
       }
       {gameVersion && gameLocation ? (
         <React.Fragment>
-          <div className={Style.gameLocationContainer}>
-            <p>{t("translatePage_gameLocation")} : {gameLocation}</p>
-            <p>{t("translatePage_gameLocationDisclaimer")}</p>
-          </div>
-          <div className={Style.translationStatusContainer}>
+          <motion.div initial={{opacity: 0, y:20}} animate={{opacity: 1, y:0}} transition={{duration: 0.5}} className={Style.gameLocationContainer}>
+            <p>{t("translatePage_gameLocation")} : <span className={Style.gameLocation}>{gameLocation}</span></p>
+            <p className={Style.disclaimer}><AlertTriangle size={12} color='var(--warning-color)'/>{t("translatePage_gameLocationDisclaimer")}</p>
+          </motion.div>
+          <motion.div initial={{opacity: 0, y:20}} animate={{opacity: 1, y:0}} transition={{duration: 0.5}} className={Style.translationStatusContainer}>
             <p>{t("translatePage_translationStatus")} :</p>
             <p>{ translationStatus === null 
               ? (<span className={Style.translationStatus}>{t("translatePage_translationStatusChecking")} <Loader2 className={Style.translationCheckingStatus} size={18} /></span>) 
               : translationStatus 
-                ? (<span className={Style.translationStatus}>{t("translatePage_translationStatusInstalled")} <Check className={Style.translationInstalledStatus} size={18} /></span>) 
-                : (<span className={Style.translationStatus}>{t("translatePage_translationStatusNotInstalled")} <X className={Style.translationNotInstalledStatus} size={18} /></span>)}
+                ? (<span className={Style.translationStatusInstalled}>{t("translatePage_translationStatusInstalled")} <Check className={Style.translationInstalledStatus} size={18} color="var(--success-color)" /></span>) 
+                : (<span className={Style.translationStatusNotInstalled}>{t("translatePage_translationStatusNotInstalled")} <X className={Style.translationNotInstalledStatus} size={18} color="var(--error-color)" /></span>)
+                }
             </p>
-          </div>
+          </motion.div>
           <div className={Style.translationActionsContainer}>
             {
               translationStatus === null 
               ? null
               : translationStatus 
                 ? (
-                    <React.Fragment>
+                    <motion.div initial={{opacity: 0, y:20}} animate={{opacity: 1, y:0}} transition={{duration: 0.5}} className={Style.actionsContainer}>
                       <Button onClick={uninstallHandler}>{t("translatePage_translationActionUninstall")}</Button>
-                      {translationUpdate ? (<Button onClick={installHandler}>{t("translatePage_translationActionUpdate")}</Button>) : null}
-                    </React.Fragment>
+                      { translationUpdate
+                        ? (<Button onClick={installHandler}>{t("translatePage_translationActionUpdateTrue")}</Button>) 
+                        : (<Button onClick={installHandler} disabled={true}>{t("translatePage_translationActionUpdateFalse")}</Button>)
+                      }
+                    </motion.div>
                   ) 
                 : translationEnabled 
-                  ? (<Button onClick={installHandler}>{t("translatePage_translationActionInstall")}</Button>)
-                  : (<Button disabled={true}>{t("translatePage_translationDisabled")}</Button>)
+                  ? (
+                      <motion.div initial={{opacity: 0, y:20}} animate={{opacity: 1, y:0}} transition={{duration: 0.5}} className={Style.actionsContainer}>
+                        <Button onClick={installHandler}>{t("translatePage_translationActionInstall")}</Button>
+                      </motion.div>
+                    )
+                  : (
+                      <motion.div initial={{opacity: 0, y:20}} animate={{opacity: 1, y:0}} transition={{duration: 0.5}} className={Style.actionsContainer}>
+                        <Button disabled={true}>{t("translatePage_translationDisabled")}</Button>
+                      </motion.div>
+                    )
             }
           </div>
         </React.Fragment>
       ) : null}
     </div>
+    </AnimatePresence>
   )
 }

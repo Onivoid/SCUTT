@@ -7,7 +7,6 @@ import frTranslation from './locales/fr.json';
 import esTranslation from './locales/es.json';
 import deTranslation from './locales/de.json';
 import itaTranslation from './locales/ita.json';
-import ruTranslation from './locales/ru.json';
 
 i18n
   .use(initReactI18next)
@@ -18,10 +17,8 @@ i18n
       es: { translation: esTranslation },
       de: { translation: deTranslation },
       ita: { translation: itaTranslation },
-      ru: { translation: ruTranslation },
-      // ... autres langues
     },
-    lng: "fr", // langue initiale
+    lng: "fr",
     fallbackLng: "en",
     interpolation: {
       escapeValue: false

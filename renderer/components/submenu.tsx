@@ -14,6 +14,10 @@ export default function SubMenu({ index, setIsShown }) {
     console.log("close");
   };
 
+  const technicalDiscordHandler = () => {
+    window.ipc.send("joinTechnicalDiscord", {});
+  }
+
   useEffect(() => {
     i18n.changeLanguage(language);
   }, [language, i18n]);
@@ -46,9 +50,7 @@ export default function SubMenu({ index, setIsShown }) {
           </Card>
         </Link>
         <Card
-          onClick={CloseMenu}
-          className={Style.card}
-          backgroundColor="white"
+          backgroundColor="var(--disabled-color)"
           elevation={0}
           height={240}
           display="flex"
@@ -56,13 +58,11 @@ export default function SubMenu({ index, setIsShown }) {
           alignItems="center"
           justifyContent="center"
         >
-          <Heading>{t("menu_featureCardContributeTitle")}</Heading>
-          <Paragraph textAlign="center">{t("menu_featureCardContributeDescription")}</Paragraph>
+          <Heading color="var(--foreground-color)">{t("menu_featureCardContributeTitle")}</Heading>
+          <Paragraph color="var(--foreground-color-variant)" textAlign="center">{t("menu_featureCardContributeDescription")}</Paragraph>
         </Card>
         <Card
-          onClick={CloseMenu}
-          className={Style.card}
-          backgroundColor="white"
+          backgroundColor="var(--disabled-color)"
           elevation={0}
           height={240}
           display="flex"
@@ -70,13 +70,11 @@ export default function SubMenu({ index, setIsShown }) {
           alignItems="center"
           justifyContent="center"
         >
-          <Heading>{t("menu_featureCardDownloadTitle")}</Heading>
-          <Paragraph textAlign="center">{t("menu_featureCardDownloadDescription")}</Paragraph>
+          <Heading color="var(--foreground-color)">{t("menu_featureCardDownloadTitle")}</Heading>
+          <Paragraph color="var(--foreground-color-variant)" textAlign="center">{t("menu_featureCardDownloadDescription")}</Paragraph>
         </Card>
         <Card
-          onClick={CloseMenu}
-          className={Style.card}
-          backgroundColor="white"
+          backgroundColor="var(--disabled-color)"
           elevation={0}
           height={240}
           display="flex"
@@ -84,40 +82,118 @@ export default function SubMenu({ index, setIsShown }) {
           alignItems="center"
           justifyContent="center"
         >
-          <Heading>{t("menu_featureCardCustomTitle")}</Heading>
-          <Paragraph textAlign="center">{t("menu_featureCardCustomDescription")}</Paragraph>
+          <Heading color="var(--foreground-color)">{t("menu_featureCardCustomTitle")}</Heading>
+          <Paragraph color="var(--foreground-color-variant)" textAlign="center">{t("menu_featureCardCustomDescription")}</Paragraph>
         </Card>
       </Pane>
     );
   } else if (index === 1) {
     return (
-      <Pane flex="1" overflowY="scroll" backgroundColor="var(--background-color-variant)" padding={16}>
+      <Pane 
+        display="grid"
+        gridTemplateColumns="repeat(2, minmax(240px, 1fr))"
+        gridTemplateRows="240px"
+        gap={10}
+        overflowY="scroll"  
+        backgroundColor="var(--background-color-variant)"
+        height="100%"
+        padding={16}>
         <Card
-          onClick={CloseMenu}
+          onClick={()=>{CloseMenu(); technicalDiscordHandler()}}
+          className={Style.card}
           backgroundColor="white"
           elevation={0}
           height={240}
           display="flex"
+          flexDirection="column"
           alignItems="center"
           justifyContent="center"
         >
-          <Heading>1</Heading>
+          <Heading>{t("menu_socialDiscord")}</Heading>
+          <Paragraph textAlign="center">{t("menu_socialDiscordDescription")}</Paragraph>
+        </Card>
+        <Card
+          backgroundColor="var(--disabled-color)"
+          elevation={0}
+          height={240}
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+        >
+        </Card>
+        <Card
+          backgroundColor="var(--disabled-color)"
+          elevation={0}
+          height={240}
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+        >
+        </Card>
+        <Card
+          backgroundColor="var(--disabled-color)"
+          elevation={0}
+          height={240}
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+        >
         </Card>
       </Pane>
     );
   } else if (index === 2) {
     return (
-      <Pane flex="1" overflowY="scroll" backgroundColor="var(--background-color-variant)" padding={16}>
+      <Pane 
+        display="grid"
+        gridTemplateColumns="repeat(2, minmax(240px, 1fr))"
+        gridTemplateRows="240px"
+        gap={10}
+        overflowY="scroll"  
+        backgroundColor="var(--background-color-variant)"
+        height="100%"
+        padding={16}>
         <Card
-          onClick={CloseMenu}
-          backgroundColor="white"
+          backgroundColor="var(--disabled-color)"
           elevation={0}
           height={240}
           display="flex"
+          flexDirection="column"
           alignItems="center"
           justifyContent="center"
         >
-          <Heading>2</Heading>
+        </Card>
+        <Card
+          backgroundColor="var(--disabled-color)"
+          elevation={0}
+          height={240}
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+        >
+        </Card>
+        <Card
+          backgroundColor="var(--disabled-color)"
+          elevation={0}
+          height={240}
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+        >
+        </Card>
+        <Card
+          backgroundColor="var(--disabled-color)"
+          elevation={0}
+          height={240}
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+        >
         </Card>
       </Pane>
     );
