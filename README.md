@@ -1,38 +1,10 @@
-<p align="center"><img src="https://i.imgur.com/NZfsD1p.png"></p>
+# SCUTT - Star Citizen Universal Translation Tool
 
-## Usage
+## Interface d'installation de la traduction de Star Citizen
 
-### Create an App
+Cet outil automatise l'installation des fichiers de traduction de Star Citizen dans toutes les langues et permet également de mettre à jour la traduction à mesure qu'elle progresse.
 
-```
-# with npx
-$ npx create-nextron-app my-app --example basic-lang-typescript
-
-# with yarn
-$ yarn create nextron-app my-app --example basic-lang-typescript
-
-# with pnpm
-$ pnpm dlx create-nextron-app my-app --example basic-lang-typescript
-```
-
-### Install Dependencies
-
-```
-$ cd my-app
-
-# using yarn or npm
-$ yarn (or `npm install`)
-
-# using pnpm
-$ pnpm install --shamefully-hoist
-```
-
-### Use it
-
-```
-# development mode
-$ yarn dev (or `npm run dev` or `pnpm run dev`)
-
-# production build
-$ yarn build (or `npm run build` or `pnpm run build`)
-```
+## Références
+* Code de l'application: https://github.com/Skullyfox/SCUTT
+* [Discord](https://discord.gg/aUEEdMdS6j)
+* Vidéo de présentation: SOON
