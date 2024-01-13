@@ -16,6 +16,7 @@ export default function HomePage() {
 
   useEffect(() => {
     i18n.changeLanguage(language);
+    console.log(i18n)
   }, [language, i18n]);
 
   return (

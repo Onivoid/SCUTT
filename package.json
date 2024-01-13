@@ -13,8 +13,8 @@
     "release": "cross-var npm install --save && git add . && cross-var git commit -m v$npm_package_version && git push origin master && cross-var git tag v$npm_package_version && cross-var git push origin v$npm_package_version"
   },
   "build": {
-    "productName": "Star Citizen Universal Translation Tool",
-    "icon": "resources/icon"
+    "productName": "SCUTT",
+    "icon": "resources/icon.ico"
   },
   "repository": "https://github.com/Skullyfox/SCUTT",
   "publish": {

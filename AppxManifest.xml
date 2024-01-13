@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  IgnorableNamespaces="uap mp">
+  <Identity Name="40627Onivoid.SCUTT-StarCitizenUniversalTranslation"
+    Version="1.0.0.0"
+    Publisher="CN=EE5235BB-CE68-42FB-BF7E-31B637CF4642" />
+
+
+  <Properties>
+    <DisplayName>SCUTT</DisplayName>
+    <PublisherDisplayName>Onivoid</PublisherDisplayName>
+    <Logo>resources/icon.ico</Logo>
+    <Description>Star Citizen Universal Translation Tool</Description>
+  </Properties>
+</Package>
