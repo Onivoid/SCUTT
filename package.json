@@ -14,7 +14,11 @@
   },
   "build": {
     "productName": "SCUTT",
-    "icon": "resources/icon.ico"
+    "icon": "resources/icon.ico",
+    "appId": "40627Onivoid.SCUTT-StarCitizenUniversalTranslation",
+    "directories": {
+      "buildResources": "resources"
+    }
   },
   "repository": "https://github.com/Skullyfox/SCUTT",
   "publish": {
