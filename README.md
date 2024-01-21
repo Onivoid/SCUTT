@@ -12,7 +12,7 @@ Cet outil automatise l'installation des fichiers de traduction de Star Citizen d
 
 ## Installation
 
-Vous pouvez télécharger l'application depuis le [Microsoft Store](https://apps.microsoft.com/detail/9NN3NXQLWQCF?hl=fr-wf&gl=WF).
+[![Microsoft Store](https://get.microsoft.com/images/fr-fr%20dark.svg)](https://apps.microsoft.com/detail/9NN3NXQLWQCF?hl=fr-wf&gl=WF)
 
 ## Développement
 
