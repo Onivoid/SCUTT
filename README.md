@@ -20,7 +20,7 @@ Pour lancer le projet en mode développement, suivez les étapes suivantes :
 
 ```sh
 # Clonez le dépôt
-git clone https://github.com/Skullyfox/SCUTT.git
+git clone https://github.com/Onivoid/SCUTT.git
 
 # Installez les dépendances
 npm install
