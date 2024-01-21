@@ -8,3 +8,4 @@ Cet outil automatise l'installation des fichiers de traduction de Star Citizen d
 * Code de l'application: https://github.com/Skullyfox/SCUTT
 * [Discord](https://discord.gg/aUEEdMdS6j)
 * Vidéo de présentation: SOON
+ 
