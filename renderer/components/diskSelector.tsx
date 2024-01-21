@@ -10,7 +10,8 @@ export default function DiskSelector({disks, setSelectedDisk, isScanning}: {disk
   const [selected, setSelected] = useState(null);
   
   const diskHandler = (value) => {
-    setSelectedDisk(value)
+    setSelected(value);
+    setSelectedDisk(value);
   };
 
   useEffect(() => {
@@ -25,7 +26,7 @@ export default function DiskSelector({disks, setSelectedDisk, isScanning}: {disk
         (label) => ({ label, value: label })
       )}
       selected={selected}
-      onSelect={(item) => {setSelected(item.value);diskHandler(item.value)}}
+      onSelect={(item) => {diskHandler(item.value)}}
     >
       <Button disabled={isScanning}>{selected || t("diskSelector_menuTitle")}</Button>
     </SelectMenu>

@@ -1,11 +1,11 @@
-const winston = require('winston');
-const path = require('path');
-const { app } = require('electron');
+import winston from 'winston';
+import path from 'path';
+import { app } from 'electron';
+import { format } from 'date-fns';
 
 const logPath = path.join(app.getPath('userData'), 'Logs');
 
-const date = new Date(Date.now());
-const formatedDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}-`;
+const formatedDate = format(new Date(), 'yyyy-MM-dd-');
 
 const logger = winston.createLogger({
   level: 'info',

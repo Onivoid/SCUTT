@@ -2,6 +2,7 @@ import path from 'path'
 import { BrowserWindow, app, ipcMain, shell } from 'electron';
 import serve from 'electron-serve'
 import { createWindow } from '../helpers'
+import logger from '../logs/logger';
 
 const isProd = process.env.NODE_ENV === 'production'
 
@@ -13,12 +14,27 @@ if (isProd) {
 
 const { createDB } = require('../database/functions');
 
+async function createDBWithRetry(retryCount = 0) {
+  const maxRetries = 5;
+  const delayBetweenRetriesMs = 500;
+
+  try {
+    await createDB();
+  } catch (error) {
+    if (retryCount < maxRetries) {
+      logger.error(`Failed to create DB, attempt ${retryCount + 1} of ${maxRetries}. Retrying in ${delayBetweenRetriesMs / 1000} seconds...`);
+      await new Promise(resolve => setTimeout(resolve, delayBetweenRetriesMs));
+      await createDBWithRetry(retryCount + 1);
+    } else {
+      logger.error(`Failed to create DB after ${maxRetries} attempts.`, error);
+      throw error;
+    }
+  }
+}
+
 export async function setupWindowEvents(){
   
-  await createDB().catch(async () => {
-    //Fix de Bourrin
-    await createDB();
-  });
+  await createDBWithRetry();
 
   const mainWindow = createWindow('main', {
     width: 300,
@@ -41,7 +57,13 @@ export async function setupWindowEvents(){
   })
   
   ipcMain.on('normal-size', async (event, arg) => {
-    const win = BrowserWindow.getFocusedWindow();
+    let win = BrowserWindow.getFocusedWindow();
+    if (!win) {
+      win = BrowserWindow.getAllWindows()[0];
+    }
+    if (!win.isFocused()){
+      win.focus();
+    }
     if (win) {
       win.setSize(1152, 648);
       win.setMinimumSize(1152, 648);  

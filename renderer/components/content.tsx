@@ -23,7 +23,9 @@ function Content({ children }) {
   };
   
   useEffect(() => {
-    window.ipc.send('normal-size', {});
+    if (window.ipc) {
+      window.ipc.send('normal-size', {});
+    }
   }, []);
 
   return (

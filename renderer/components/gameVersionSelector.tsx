@@ -10,7 +10,8 @@ export default function GameVersionSelector({setGameVersion}) {
   const gameVersionList = require("../../main/helpers/gameVersionList.json");
   
   const gameVersionHandler = (value) => {
-    setGameVersion(value)
+    setSelected(value);
+    setGameVersion(value);
   };
 
   useEffect(() => {
@@ -25,7 +26,7 @@ export default function GameVersionSelector({setGameVersion}) {
         (label) => ({ label, value: label })
       )}
       selected={selected}
-      onSelect={(item) => {setSelected(item.value);gameVersionHandler(item.value)}}
+      onSelect={(item) => {gameVersionHandler(item.value)}}
     >
       <Button>{selected || t("gameVersionSelector_menuTitle")}</Button>
     </SelectMenu>

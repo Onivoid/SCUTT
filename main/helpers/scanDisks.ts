@@ -1,16 +1,16 @@
-const { exec } = require('child_process');
+import { exec } from 'child_process';
 import logger from '../logs/logger';
 
-export default async () => {
+export default async function scanDisks() {
   try {
-    const drives: Array<string>= await new Promise((resolve, reject) => {
+    const drives = await new Promise((resolve, reject) => {
       exec('wmic logicaldisk get caption', (error, stdout, stderr) => {
         if (error) {
-          logger.error(`Erreur lors de l'exécution de la commande : ${error.message}`);
+          logger.error(`Failed to execute command: ${error.message}`);
           reject(error);
         }
         if (stderr) {
-          logger.error(`Erreur de la commande : ${stderr}`);
+          logger.error(`Command error: ${stderr}`);
           reject(stderr);
         }
 
@@ -28,7 +28,7 @@ export default async () => {
       disks: drives,
     };
   } catch (error) {
-    logger.error(error);
+    logger.error(`Failed to scan disks: ${error}`);
     return {
       disks: [],
     };

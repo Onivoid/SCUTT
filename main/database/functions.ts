@@ -33,7 +33,6 @@ const createDB = async () => {
             logger.error('Erreur lors de la vérification de l\'entrée UserPreferences :', err.message);
             reject(false); 
           } else if (!row) {
-            resolve(true);
             const insertQuery = `
               INSERT INTO UserPreferences (id, GamePathLive, GamePathPtu, GamePathEptu, GamePathTechPreview, lastUpdate, UiPreferences)
               VALUES (1, NULL, NULL, NULL, NULL, NULL, NULL)
@@ -43,6 +42,7 @@ const createDB = async () => {
                 logger.error('Erreur lors de l\'insertion des préférences par défaut :', err.message);
               } else {
                 logger.info('Entrée UserPreferences avec id = 1 créée avec des valeurs par défaut.');
+                resolve(true);
               }
             });
           } else {
