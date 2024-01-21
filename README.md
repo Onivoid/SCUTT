@@ -31,5 +31,7 @@ npm run dev
 
 ## Références
 Code de l'application: [GitHub](https://github.com/Onivoid/SCUTT)
+
 [Discord](https://discord.gg/65VdVwdHT5)
+
 Vidéo de présentation: SOON
