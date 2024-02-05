@@ -5,6 +5,8 @@ import checkTranslationStatus from "../helpers/check_translationStatus";
 import uninstallTranslation from "../helpers/uninstall_translation";
 import installTranslation from "../helpers/install_translation";
 import checkTranslationUpdate from "../helpers/check_translationUpdate";
+import { updateUserUiPreferences, getUserPreferences } from "../database/functions";
+import { get } from "http";
 
 export async function systemEvents() {
   ipcMain.handle('get-disks', async () => {
@@ -31,6 +33,15 @@ export async function systemEvents() {
   ipcMain.handle('check-translation-update', async (event, {localisation, lang}: {localisation: string, lang: string}) => {
     return checkTranslationUpdate(localisation, lang).then((res) => {
       return res;
+    });
+  });
+  ipcMain.on('last-visited', async (event, {page}: {page: string}) => {
+    getUserPreferences(async (err, row) => {
+      if (!err && row){
+          let UiPreferences = row.UiPreferences;
+          UiPreferences["LastVisitedPage"] = page;
+          updateUserUiPreferences(UiPreferences);
+      }
     });
   });
 }

@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Style from '../styles/modules/run.module.css'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
+import UserPreferences from '../../main/database/class/UserPreferences'
 
 export default function RunPage(){
   const { t } = useTranslation();
@@ -11,7 +12,14 @@ export default function RunPage(){
 
   useEffect(() => {
     setTimeout(() => {
-      router.push('/home');
+      window.ipc.invoke('get-user-preferences').then(async (result: UserPreferences) => {
+        let UiPreferences = result.UiPreferences;
+        if (UiPreferences["SaveLastPage?"] && UiPreferences["LastVisitedPage"]) {
+          router.push(UiPreferences["LastVisitedPage"]);
+        } else {
+          router.push('/home');
+        }
+      });
     }, 3000);
   }, []);
 

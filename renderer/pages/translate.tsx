@@ -27,16 +27,16 @@ export default function TranslatePage() {
   const [translationUpdate, setTranslationUpdate] = useState<boolean>(false);
 
   const existingGamePaths = {
-    "GamePathLive": (data: UserPreferences) => {
+    "GamePathLIVE": (data: UserPreferences) => {
       data.GamePathLive ? setGameLocation(data.GamePathLive) : null;
     },
-    "GamePathPtu": (data: UserPreferences) => {
+    "GamePathPTU": (data: UserPreferences) => {
       data.GamePathPtu ? setGameLocation(data.GamePathPtu) : null;
     },
-    "GamePathEptu": (data: UserPreferences) => {
+    "GamePathEPTU": (data: UserPreferences) => {
       data.GamePathEptu ? setGameLocation(data.GamePathEptu) : null;
     },
-    "GamePathTechPreview": (data: UserPreferences) => {
+    "GamePathTechPREVIEW": (data: UserPreferences) => {
       data.GamePathTechPreview ? setGameLocation(data.GamePathTechPreview) : null;
     },
   }
@@ -68,6 +68,7 @@ export default function TranslatePage() {
   }, [language, i18n]);
 
   useEffect(() => {
+    window.ipc.send('last-visited', {page: "/translate"});
     window.ipc.invoke("get-disks").then(async (result) => {
       setDisks(result.disks);
     });

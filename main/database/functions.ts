@@ -35,7 +35,7 @@ const createDB = async () => {
           } else if (!row) {
             const insertQuery = `
               INSERT INTO UserPreferences (id, GamePathLive, GamePathPtu, GamePathEptu, GamePathTechPreview, lastUpdate, UiPreferences)
-              VALUES (1, NULL, NULL, NULL, NULL, NULL, NULL)
+              VALUES (1, NULL, NULL, NULL, NULL, NULL, '{}')
             `;
             db.run(insertQuery, (err) => {
               if (err) {
@@ -61,11 +61,31 @@ const updateUserPreferences = (data: UserPreferences) => {
     VALUES (?, ?, ?, ?, ?, ?, ?)
   `);
 
-  stmt.run(data.id, data.GamePathLive, data.GamePathPtu, data.GamePathEptu, data.GamePathTechPreview, data.lastUpdate, JSON.stringify(data.UiPreferences), (err) => {
+  stmt.run(data.id, data.GamePathLive, data.GamePathPtu, data.GamePathEptu, data.GamePathTechPreview, data.lastUpdate, data.UiPreferences, (err) => {
     if (err) {
       logger.error('Erreur lors de la mise à jour des préférences utilisateur :', err.message);
     } else {
       logger.info('Préférences utilisateur mises à jour avec succès.');
+    }
+  });
+
+  stmt.finalize();
+}
+
+const updateUserUiPreferences = (uiPreferences: Record<string, any>) => {
+  const id = 1;
+
+  const stmt = db.prepare(`
+    UPDATE UserPreferences
+    SET UiPreferences = ?
+    WHERE id = ?
+  `);
+
+  stmt.run(JSON.stringify(uiPreferences), id, (err) => {
+    if (err) {
+      logger.error('Erreur lors de la mise à jour des préférences UI de l\'utilisateur :', err.message);
+    } else {
+      logger.info('Préférences UI de l\'utilisateur mises à jour avec succès.');
     }
   });
 
@@ -94,4 +114,4 @@ const getUserPreferences = (callback) => {
 }
 
 
-export { createDB, updateUserPreferences, getUserPreferences };
+export { createDB, updateUserPreferences, updateUserUiPreferences, getUserPreferences };

@@ -1,5 +1,5 @@
 import { ipcMain } from "electron";
-import { updateUserPreferences, getUserPreferences } from "../database/functions";
+import { updateUserPreferences, getUserPreferences, updateUserUiPreferences } from "../database/functions";
 import UserPreferences from '../database/class/UserPreferences';
 
 export async function databaseEvents() {
@@ -13,8 +13,10 @@ export async function databaseEvents() {
           version === 'EPTU' ? gamePath: row.GamePathEptu,
           version === 'TECH-PREVIEW' ? gamePath: row.GamePathTechPreview,
           new Date(),
-          {},
+          row.UiPreferences,
         );
+
+        console.log(data);
       
         await updateUserPreferences(data);
       }
@@ -31,5 +33,9 @@ export async function databaseEvents() {
         }
       });
     });
+  });
+
+  ipcMain.handle('update-user-ui-preferences', async (event, uiPreferences: Record<string, any>) => {
+    await updateUserUiPreferences(uiPreferences);
   });
 }

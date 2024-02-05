@@ -15,6 +15,10 @@ export default function HomePage() {
   }
 
   useEffect(() => {
+      window.ipc.send('last-visited', {page: "/home"});
+  }, []);
+
+  useEffect(() => {
     i18n.changeLanguage(language);
     console.log(i18n)
   }, [language, i18n]);

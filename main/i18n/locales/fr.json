@@ -35,6 +35,9 @@
   "menu_socialDiscord": "Discord",
   "menu_socialDiscordDescription": "Rejoindre la communauté SCUTT !",
   "menu_settingsPanel": "Paramètres",
+  "menu_settingsTitle": "Paramètres",
+
+  "settings_saveLastPage": "Sauvegarder la dernière page visitée",
 
   "diskSelector_title": "Sélectionner un disque",
   "diskSelector_menuTitle": "Sélectionner un disque ...",

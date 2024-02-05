@@ -2,7 +2,7 @@
   "private": true,
   "name": "scutt",
   "description": "Star Citizen Universal Translation Tool",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "Logan Wilquin <onivoid.tv@gmail.com>",
   "main": "app/background.js",
   "scripts": {
