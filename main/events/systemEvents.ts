@@ -38,7 +38,7 @@ export async function systemEvents() {
   ipcMain.on('last-visited', async (event, {page}: {page: string}) => {
     getUserPreferences(async (err, row) => {
       if (!err && row){
-          let UiPreferences = row.UiPreferences;
+          let UiPreferences = typeof row.UiPreferences === 'string' ? JSON.parse(row.UiPreferences) : row.UiPreferences;
           UiPreferences["LastVisitedPage"] = page;
           updateUserUiPreferences(UiPreferences);
       }

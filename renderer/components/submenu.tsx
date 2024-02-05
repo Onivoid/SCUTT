@@ -26,14 +26,14 @@ export default function SubMenu({ index, setIsShown }) {
 
   useEffect(() => {
     window.ipc.invoke("get-user-preferences").then(async (result: UserPreferences) => {
-      let UiPreferences = result.UiPreferences;
+      let UiPreferences = typeof result.UiPreferences === "string" ? JSON.parse(result.UiPreferences) : result.UiPreferences;
       setChecked(UiPreferences["SaveLastPage?"]);
     });
   }, []);
 
   useEffect(() => {
     window.ipc.invoke("get-user-preferences").then(async (result: UserPreferences) => {
-      let UiPreferences = result.UiPreferences;
+      let UiPreferences = typeof result.UiPreferences === "string" ? JSON.parse(result.UiPreferences) : result.UiPreferences;
       UiPreferences["SaveLastPage?"] = checked;
       window.ipc.invoke("update-user-ui-preferences", UiPreferences);
     });
