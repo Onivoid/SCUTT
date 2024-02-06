@@ -36,6 +36,8 @@
   "menu_socialDiscordDescription": "Rejoindre la communauté SCUTT !",
   "menu_settingsPanel": "Paramètres",
   "menu_settingsTitle": "Paramètres",
+  "admin_warning_title": "Le logiciel n'est pas en mode administrateur",
+  "admin_warning_description": "Pour que le logiciel fonctionne correctement, veuillez le lancer en mode administrateur.",
 
   "settings_saveLastPage": "Sauvegarder la dernière page visitée",
 

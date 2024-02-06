@@ -50,14 +50,12 @@ export default function Menu() {
                   {tab}
                 </Tab>
               ))}
-              {router.pathname !== "/home" ? (
-                <Link href="/home">
-                  <Tab display="flex" gap={6} color="var(--variant-color)" onSelect={() => setIsShown(false)}>
-                    <Home size={16} />
-                    {t("menu_homePanel")}
-                  </Tab>
-                </Link>
-              ) : null}
+              <Link href="/home">
+                <Tab display="flex" gap={6} color="var(--variant-color)" onSelect={() => setIsShown(false)}>
+                  <Home size={16} />
+                  {t("menu_homePanel")}
+                </Tab>
+              </Link>
             </Tablist>
           </Pane>
         </Pane>

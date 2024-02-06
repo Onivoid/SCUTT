@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@200;400;700&family=Noto+Color+Emoji&display=swap');
 
 :root{
-  --background-color: #2c2c54;
-  --background-color-variant: #40407a;
-  --foreground-color: #F9FAFC;
-  --foreground-color-variant: #cccccc;
-  --disabled-color: #969696;
-  --accent-color: #8d8cdf;
+  --background-color: #272949;
+  --background-color-variant: #373d77;
+  --foreground-color: #f9fafb;
+  --foreground-color-variant: #e5e7eb;
+  --disabled-color: #6b7280;
+  --accent-color: #6a74ce;
   --variant-color: #ff793f;
   --success-color: #52BD95;
   --warning-color: #FFB020;

@@ -6,7 +6,8 @@ import uninstallTranslation from "../helpers/uninstall_translation";
 import installTranslation from "../helpers/install_translation";
 import checkTranslationUpdate from "../helpers/check_translationUpdate";
 import { updateUserUiPreferences, getUserPreferences } from "../database/functions";
-import { get } from "http";
+import { exec } from "child_process";
+import { app } from 'electron';
 
 export async function systemEvents() {
   ipcMain.handle('get-disks', async () => {
@@ -42,6 +43,17 @@ export async function systemEvents() {
           UiPreferences["LastVisitedPage"] = page;
           updateUserUiPreferences(UiPreferences);
       }
+    });
+  });
+  ipcMain.handle('is-elevated', async (event) => {
+    return new Promise((resolve, reject) => {
+      exec('net session', (err, stdout, stderr) => {
+        if (err) {
+          resolve(false);
+        } else {
+          resolve(true);
+        }
+      });
     });
   });
 }
