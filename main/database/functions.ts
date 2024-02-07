@@ -113,5 +113,22 @@ const getUserPreferences = (callback) => {
   );
 }
 
+const resetDB = () => {
+  const stmt = db.prepare(`
+    UPDATE UserPreferences SET GamePathLive = NULL, GamePathPtu = NULL, GamePathEptu = NULL, GamePathTechPreview = NULL, lastUpdate = NULL, UiPreferences = '{}'
+    WHERE id = 1
+  `);
 
-export { createDB, updateUserPreferences, updateUserUiPreferences, getUserPreferences };
+  stmt.run((err) => {
+    if (err) {
+      logger.error('Erreur lors de la réinitialisation de la base de données :', err.message);
+    } else {
+      logger.info('Base de données réinitialisée avec succès.');
+    }
+  });
+
+  stmt.finalize();
+};
+
+
+export { createDB, updateUserPreferences, updateUserUiPreferences, getUserPreferences, resetDB };

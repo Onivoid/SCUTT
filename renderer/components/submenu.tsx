@@ -5,6 +5,7 @@ import { useLanguage } from '../components/languageContext'
 import Style from '../styles/modules/submenu.module.css'
 import Link from 'next/link';
 import UserPreferences from '../../main/database/class/UserPreferences';
+import {ExportDB, ExportDBJSON, ResetDB} from './exportDB';
 
 export default function SubMenu({ index, setIsShown }) {
   const { t, i18n } = useTranslation();
@@ -178,10 +179,14 @@ export default function SubMenu({ index, setIsShown }) {
           display="flex"
           flexDirection="column"
           padding={16}>
-          <Heading color="var(--background-color)">{t("menu_settingsTitle")}</Heading>
+          <Heading color="var(--background-color)">{t("menu_basicsSettingsTitle")}</Heading>
           <Checkbox 
             label={t("settings_saveLastPage")} 
             checked={checked} onChange={e => setChecked(e.target.checked)} />
+          <Heading color="var(--background-color)">{t("menu_DBSettingsTitle")}</Heading>
+          <ExportDB />
+          <ExportDBJSON />
+          <ResetDB />
         </Card>
       </Pane>
     );
