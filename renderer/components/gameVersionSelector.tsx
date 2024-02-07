@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useLanguage } from "./languageContext";
 import { SelectMenu, Button } from "evergreen-ui";
+import UserPreferences from "../../main/database/class/UserPreferences";
 
 export default function GameVersionSelector({setGameVersion}) {
   const { t, i18n } = useTranslation();
@@ -12,7 +13,20 @@ export default function GameVersionSelector({setGameVersion}) {
   const gameVersionHandler = (value) => {
     setSelected(value);
     setGameVersion(value);
+    window.ipc.send('last-gameVersion', {gameVersion: value});
   };
+
+  useEffect(() => {
+    window.ipc.invoke('get-user-preferences').then(async (result: UserPreferences) => {
+      let UiPreferences = result.UiPreferences;
+      if (UiPreferences["SaveLastPage?"] && UiPreferences["LastVisitedPage"] === "/translate" && UiPreferences["LastGameVersion"]) {
+        if (UiPreferences["LastGameVersion"]) {
+          setSelected(UiPreferences["LastGameVersion"]);
+          setGameVersion(UiPreferences["LastGameVersion"]);
+        }
+      }
+    });
+  }, []);
 
   useEffect(() => {
     i18n.changeLanguage(language);

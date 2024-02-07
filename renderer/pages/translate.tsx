@@ -69,15 +69,15 @@ export default function TranslatePage() {
 
   useEffect(() => {
     window.ipc.send('last-visited', {page: "/translate"});
+    window.ipc.invoke("get-user-preferences").then(async (result: UserPreferences) => {
+      await setUserPreferences(result);
+    });
     window.ipc.invoke("get-disks").then(async (result) => {
       setDisks(result.disks);
     });
   }, []);
   
   useEffect(() => {
-    window.ipc.invoke("get-user-preferences").then(async (result: UserPreferences) => {
-      await setUserPreferences(result);
-    });
     if (gameLocation != null) {
       window.ipc.invoke("check-translation-status", {localisation: `${gameLocation}\\StarCitizen\\${gameVersion.toLocaleUpperCase()}`, lang: i18n.language}).then(async (result) => {
         const {enabled, response, link} = result;
@@ -91,11 +91,15 @@ export default function TranslatePage() {
   useEffect(() => {
     setGameLocation(null);
     setTranslationStatus(false);
+  }, [gameVersion]);
+
+  useEffect(() => {
+    if (!userPreferences) return;
     const existingGamePathsHandler = existingGamePaths[`GamePath${gameVersion}`];
     if (existingGamePathsHandler) {
       existingGamePathsHandler(userPreferences);
     }
-  }, [gameVersion]);
+  }, [gameVersion, userPreferences]);
 
   useEffect(() => {
     isScanning ? setScanningError(false) : null;
@@ -115,7 +119,6 @@ export default function TranslatePage() {
     if (translationStatus) {
       window.ipc.invoke("check-translation-update", {localisation: `${gameLocation}\\StarCitizen\\${gameVersion.toLocaleUpperCase()}`, lang: i18n.language}).then(async (result) => {
         setTranslationUpdate(!result);
-        console.log(!result);
       });
     }
   }, [translationStatus]);

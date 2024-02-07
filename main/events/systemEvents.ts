@@ -45,6 +45,15 @@ export async function systemEvents() {
       }
     });
   });
+  ipcMain.on('last-gameVersion', async (event, {gameVersion}: {gameVersion: string}) => {
+    getUserPreferences(async (err, row) => {
+      if (!err && row){
+          let UiPreferences = typeof row.UiPreferences === 'string' ? JSON.parse(row.UiPreferences) : row.UiPreferences;
+          UiPreferences["LastGameVersion"] = gameVersion;
+          updateUserUiPreferences(UiPreferences);
+      }
+    });
+  });
   ipcMain.handle('is-elevated', async (event) => {
     return new Promise((resolve, reject) => {
       exec('net session', (err, stdout, stderr) => {
