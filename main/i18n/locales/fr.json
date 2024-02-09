@@ -39,6 +39,7 @@
   "menu_DBSettingsTitle": "Paramètres de la Base de Données",
   "admin_warning_title": "Le logiciel n'est pas en mode administrateur",
   "admin_warning_description": "Pour que le logiciel fonctionne correctement, veuillez le lancer en mode administrateur.",
+  "menu_bugReport_title": "Bug Report",
 
   "settings_saveLastPage": "Sauvegarder la dernière page visitée",
   "exportDB_success_title": "Base de données exportée",
@@ -48,6 +49,7 @@
   "resetDB_success_title": "Base de données réinitialisée",
   "resetDB_success_description": "La base de données a été réinitialisée avec succès.",
   "resetDB_button": "Réinitialiser la base de données",
+  "bugReport_button": "Signaler un bug",
 
   "diskSelector_title": "Sélectionner un disque",
   "diskSelector_menuTitle": "Sélectionner un disque ...",

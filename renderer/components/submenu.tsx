@@ -6,6 +6,7 @@ import Style from '../styles/modules/submenu.module.css'
 import Link from 'next/link';
 import UserPreferences from '../../main/database/class/UserPreferences';
 import {ExportDB, ExportDBJSON, ResetDB} from './exportDB';
+import BugReport from './bugReport';
 
 export default function SubMenu({ index, setIsShown }) {
   const { t, i18n } = useTranslation();
@@ -187,6 +188,8 @@ export default function SubMenu({ index, setIsShown }) {
           <ExportDB />
           <ExportDBJSON />
           <ResetDB />
+          <Heading color="var(--background-color)">{t("menu_bugReport_title")}</Heading>
+          <BugReport />
         </Card>
       </Pane>
     );

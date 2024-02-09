@@ -71,7 +71,7 @@ function ResetDB() {
   };
 
   return (
-    <Button maxWidth={350} marginBottom={5} onClick={handleExportDatabase} intent='danger' appearance='primary'>{t("resetDB_button")}</Button>
+    <Button maxWidth={350} marginBottom={10} onClick={handleExportDatabase} intent='danger' appearance='primary'>{t("resetDB_button")}</Button>
   );
 }
 
