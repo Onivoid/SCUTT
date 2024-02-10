@@ -15,7 +15,6 @@ export default function SubMenu({ index, setIsShown }) {
 
   const CloseMenu = () => {
     setIsShown(false);
-    console.log("close");
   };
 
   const technicalDiscordHandler = () => {

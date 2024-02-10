@@ -19,8 +19,6 @@ export async function databaseEvents() {
           new Date(),
           row.UiPreferences,
         );
-
-        console.log(data);
       
         await updateUserPreferences(data);
       }
@@ -57,7 +55,7 @@ export async function databaseEvents() {
       return;
     }
 
-    await fs.copyFile(dbPath, filePath, (err) => { err ? console.error(err) : console.log('Database exported')});
+    await fs.copyFile(dbPath, filePath, (err) => { err ? console.error(err) : null});
   
     return filePath;
   });
@@ -94,8 +92,6 @@ export async function databaseEvents() {
     await fs.writeFile(filePath, JSON.stringify(data, null, 2), (err) => {
       if (err) {
         console.error(err);
-      } else {
-        console.log('Database exported');
       }
     });
   
