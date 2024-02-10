@@ -67,6 +67,10 @@
   "translatePage_translationActionUpdateFalse": "Aucunes mises à jour disponibles",
   "translatePage_translationActionUninstall": "Désinstaller la traduction",
   "translatePage_translationDisabled": "Traduction indisponible dans votre langue pour le moment.",
+  "translatePage_translationInstallSuccess": "Traduction installée avec succès !",
+  "translatePage_translationUninstallnstallSuccess": "Traduction désinstallée avec succès !",
+  "translationSelector_title": "Sélectionner une traduction",
+  "translationSelector_noTranslations": "Aucune traduction disponible pour le moment.",
 
   "languageSelector_placeholder": "Choisissez une langue",
   "languageSelector_french": "Français",

@@ -15,7 +15,9 @@ export default function HomePage() {
   }
 
   useEffect(() => {
-      window.ipc.send('last-visited', {page: "/home"});
+      window.ipc.invoke('get-translations').then((res) => {
+        console.log(res['fr'].links);
+      });
   }, []);
 
   useEffect(() => {

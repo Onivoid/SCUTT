@@ -7,7 +7,8 @@ import installTranslation from "../helpers/install_translation";
 import checkTranslationUpdate from "../helpers/check_translationUpdate";
 import { updateUserUiPreferences, getUserPreferences } from "../database/functions";
 import { exec } from "child_process";
-import { app } from 'electron';
+import axios from "axios";
+import Translation from "../helpers/class/translation";
 
 export async function systemEvents() {
   ipcMain.handle('get-disks', async () => {
@@ -26,13 +27,13 @@ export async function systemEvents() {
       return res;
     });
   });
-  ipcMain.handle('install-translation', async (event, {localisation, lang}: {localisation: string, lang: string}) => {
-    return installTranslation(localisation, lang).then((res) => {
+  ipcMain.handle('install-translation', async (event, {translation, localisation, lang}: {translation: Translation, localisation: string, lang: string}) => {
+    return installTranslation(translation, localisation, lang).then((res) => {
       return res;
     });
   });
-  ipcMain.handle('check-translation-update', async (event, {localisation, lang}: {localisation: string, lang: string}) => {
-    return checkTranslationUpdate(localisation, lang).then((res) => {
+  ipcMain.handle('check-translation-update', async (event, {translation, localisation, lang}: {translation: Translation, localisation: string, lang: string}) => {
+    return checkTranslationUpdate(translation, localisation, lang).then((res) => {
       return res;
     });
   });
@@ -54,6 +55,24 @@ export async function systemEvents() {
       }
     });
   });
+  ipcMain.on('choosed-language', async (event, {lang}: {lang: string}) => {
+    getUserPreferences(async (err, row) => {
+      if (!err && row){
+          let UiPreferences = typeof row.UiPreferences === 'string' ? JSON.parse(row.UiPreferences) : row.UiPreferences;
+          UiPreferences["choosedLanguage"] = lang;
+          updateUserUiPreferences(UiPreferences);
+      }
+    });
+  });
+  ipcMain.on('choosed-translation', async (event, {translation}: {translation: Record<string, any>}) => {
+    getUserPreferences(async (err, row) => {
+      if (!err && row){
+          let UiPreferences = typeof row.UiPreferences === 'string' ? JSON.parse(row.UiPreferences) : row.UiPreferences;
+          UiPreferences["choosedTranslation"] = translation;
+          updateUserUiPreferences(UiPreferences);
+      }
+    });
+  });
   ipcMain.handle('is-elevated', async (event) => {
     return new Promise((resolve, reject) => {
       exec('net session', (err, stdout, stderr) => {
@@ -61,6 +80,17 @@ export async function systemEvents() {
           resolve(false);
         } else {
           resolve(true);
+        }
+      });
+    });
+  });
+  ipcMain.handle('get-translations', async () => {
+    return new Promise((resolve, reject) => {
+      const data = axios.get('https://scutt.onivoid.fr/api/translations').then((res) => {
+        if (res.status !== 200) {
+          reject('Error');
+        } else {
+          resolve(res.data);
         }
       });
     });

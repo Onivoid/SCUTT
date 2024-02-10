@@ -6,9 +6,10 @@ import { useLanguage } from '../components/languageContext'
 import UserPreferences from '../../main/database/class/UserPreferences'
 import GameVersionSelector from '../components/gameVersionSelector'
 import DiskSelector from '../components/diskSelector'
-import { Button } from 'evergreen-ui'
+import { Button, toaster } from 'evergreen-ui'
 import { Loader2, Check, X, AlertTriangle } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion';
+import TranslationSelector from '../components/translationSelector'
 
 
 export default function TranslatePage() {
@@ -23,8 +24,8 @@ export default function TranslatePage() {
   const [scanningError, setScanningError] = useState<boolean>(false);
   const [translationStatus, setTranslationStatus] = useState<boolean>(null);
   const [translationEnabled, setTranslationEnabled] = useState<boolean>(false);
-  const [translationLink, setTranslationLink] = useState<string>(null);
   const [translationUpdate, setTranslationUpdate] = useState<boolean>(false);
+  const [translation, setTranslation] = useState<Record<string, any>>(null);
 
   const existingGamePaths = {
     "GamePathLIVE": (data: UserPreferences) => {
@@ -42,15 +43,17 @@ export default function TranslatePage() {
   }
 
   const installHandler = () => {
-    window.ipc.invoke("install-translation", {localisation: `${gameLocation}\\StarCitizen\\${gameVersion.toLocaleUpperCase()}`, lang: i18n.language}).then(async (result) => {
+    window.ipc.invoke("install-translation", {translation: translation, localisation: `${gameLocation}\\StarCitizen\\${gameVersion.toLocaleUpperCase()}`, lang: i18n.language}).then(async (result) => {
       setTranslationStatus(true);
       setTranslationUpdate(false);
+      toaster.success(t("translatePage_translationInstallSuccess"));
     });
   };
 
   const uninstallHandler = () => {
     window.ipc.invoke("uninstall-translation", {localisation: `${gameLocation}\\StarCitizen\\${gameVersion.toLocaleUpperCase()}`}).then(async (result) => {
       setTranslationStatus(false);
+      toaster.success(t("translatePage_translationUninstallSuccess"));
     });
   };
 
@@ -59,16 +62,13 @@ export default function TranslatePage() {
     
     if (gameLocation != null) {
       window.ipc.invoke("check-translation-status", {localisation: `${gameLocation}\\StarCitizen\\${gameVersion.toLocaleUpperCase()}`, lang: i18n.language}).then(async (result) => {
-        const {enabled, response, link} = result;
+        const {response} = result;
         setTranslationStatus(response);
-        setTranslationEnabled(enabled);
-        setTranslationLink(link);
       });
     }
   }, [language, i18n]);
 
   useEffect(() => {
-    window.ipc.send('last-visited', {page: "/translate"});
     window.ipc.invoke("get-user-preferences").then(async (result: UserPreferences) => {
       await setUserPreferences(result);
     });
@@ -80,18 +80,33 @@ export default function TranslatePage() {
   useEffect(() => {
     if (gameLocation != null) {
       window.ipc.invoke("check-translation-status", {localisation: `${gameLocation}\\StarCitizen\\${gameVersion.toLocaleUpperCase()}`, lang: i18n.language}).then(async (result) => {
-        const {enabled, response, link} = result;
+        const {response} = result;
         setTranslationStatus(response);
-        setTranslationEnabled(enabled);
-        setTranslationLink(link);
+        if (response && translation) {
+          window.ipc.invoke("check-translation-update", {translation: translation, localisation: `${gameLocation}\\StarCitizen\\${gameVersion.toLocaleUpperCase()}`, lang: i18n.language}).then(async (result) => {
+            setTranslationUpdate(!result);
+          });
+        }
       });
     }
-  }, [gameLocation]);
+  }, [gameLocation, translation]);
+
+  useEffect(() => {
+    window.ipc.send('choosed-translation', {translation: translation});
+  }, [translation]);
 
   useEffect(() => {
     setGameLocation(null);
     setTranslationStatus(false);
   }, [gameVersion]);
+
+  useEffect(() => {
+    if (translationStatus && translation) {
+      window.ipc.invoke("check-translation-update", {translation: translation, localisation: `${gameLocation}\\StarCitizen\\${gameVersion.toLocaleUpperCase()}`, lang: i18n.language}).then(async (result) => {
+        setTranslationUpdate(!result);
+      });
+    }
+  }, [translationStatus]);
 
   useEffect(() => {
     if (!userPreferences) return;
@@ -114,14 +129,6 @@ export default function TranslatePage() {
       setIsScanning(false);
     }) : null;
   }, [isScanning]);
-
-  useEffect(() => {
-    if (translationStatus) {
-      window.ipc.invoke("check-translation-update", {localisation: `${gameLocation}\\StarCitizen\\${gameVersion.toLocaleUpperCase()}`, lang: i18n.language}).then(async (result) => {
-        setTranslationUpdate(!result);
-      });
-    }
-  }, [translationStatus]);
 
   return (
     <AnimatePresence>
@@ -154,14 +161,20 @@ export default function TranslatePage() {
             <p className={Style.disclaimer}><AlertTriangle size={12} color='var(--warning-color)'/>{t("translatePage_gameLocationDisclaimer")}</p>
           </motion.div>
           <motion.div initial={{opacity: 0, y:20}} animate={{opacity: 1, y:0}} transition={{duration: 0.5}} className={Style.translationStatusContainer}>
-            <p>{t("translatePage_translationStatus")} :</p>
-            <p>{ translationStatus === null 
-              ? (<span className={Style.translationStatus}>{t("translatePage_translationStatusChecking")} <Loader2 className={Style.translationCheckingStatus} size={18} /></span>) 
-              : translationStatus 
-                ? (<span className={Style.translationStatusInstalled}>{t("translatePage_translationStatusInstalled")} <Check className={Style.translationInstalledStatus} size={18} color="var(--success-color)" /></span>) 
-                : (<span className={Style.translationStatusNotInstalled}>{t("translatePage_translationStatusNotInstalled")} <X className={Style.translationNotInstalledStatus} size={18} color="var(--error-color)" /></span>)
-                }
-            </p>
+            <div className={Style.translationStatusSubContainer}>
+              <p>Traduction à Installer : </p> 
+              <TranslationSelector setTranslation={setTranslation} setTranslationEnabled={setTranslationEnabled} translationEnabled={translationEnabled}/>
+            </div>
+            <div className={Style.translationStatusSubContainer}>
+              <p>{t("translatePage_translationStatus")} :</p>
+              <p>{ translationStatus === null 
+                ? (<span className={Style.translationStatus}>{t("translatePage_translationStatusChecking")} <Loader2 className={Style.translationCheckingStatus} size={18} /></span>) 
+                : translationStatus 
+                  ? (<span className={Style.translationStatusInstalled}>{t("translatePage_translationStatusInstalled")} <Check className={Style.translationInstalledStatus} size={18} color="var(--success-color)" /></span>) 
+                  : (<span className={Style.translationStatusNotInstalled}>{t("translatePage_translationStatusNotInstalled")} <X className={Style.translationNotInstalledStatus} size={18} color="var(--error-color)" /></span>)
+                  }
+              </p>
+            </div>
           </motion.div>
           <div className={Style.translationActionsContainer}>
             {

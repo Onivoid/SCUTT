@@ -5,22 +5,25 @@ import Style from '../styles/modules/run.module.css'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 import UserPreferences from '../../main/database/class/UserPreferences'
+import axios from 'axios'
 
 export default function RunPage(){
   const { t } = useTranslation();
   const router = useRouter();
 
   useEffect(() => {
-    setTimeout(() => {
-      window.ipc.invoke('get-user-preferences').then(async (result: UserPreferences) => {
-        let UiPreferences = result.UiPreferences;
-        if (UiPreferences["SaveLastPage?"] && UiPreferences["LastVisitedPage"]) {
-          router.push(UiPreferences["LastVisitedPage"]);
-        } else {
-          router.push('/home');
-        }
-      });
-    }, 3000);
+    axios.get('https://scutt.onivoid.fr/').then(() => {
+      setTimeout(() => {
+        window.ipc.invoke('get-user-preferences').then(async (result: UserPreferences) => {
+          let UiPreferences = result.UiPreferences;
+          if (UiPreferences["SaveLastPage?"] && UiPreferences["LastVisitedPage"]) {
+            router.push(UiPreferences["LastVisitedPage"]);
+          } else {
+            router.push('/home');
+          }
+        });
+      }, 3000);
+    });
   }, []);
 
   return (

@@ -37,8 +37,14 @@
 }
 .translationStatusContainer{
   display: flex;
-  gap: 5px;
+  flex-direction: column;
+  gap: 10px;
   position: relative;
+}
+.translationStatusSubContainer{
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 .translationStatusInstalled{
   display: flex;

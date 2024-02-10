@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { SelectMenu, Button } from 'evergreen-ui';
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from './languageContext';
+import UserPreferences from '../../main/database/class/UserPreferences';
+import router from 'next/router';
 
 export default function LanguageSelector() {
   const { t, i18n } = useTranslation();
   const [language, setLanguage] = useState("fr");
   const { changeLanguage } = useLanguage();
+  const [selected, setSelected] = useState(t("languageSelector_french"));
 
   // Options pour les langues
   const languageOptions = [
@@ -40,16 +43,24 @@ export default function LanguageSelector() {
   useEffect(() => {
     i18n.changeLanguage(language);
     changeLanguage(language);
-  }, [language, i18n]);
-
-  useEffect(() => {
     const currentLanguageOption = languageOptions.find(option => option.value === language);
     if (currentLanguageOption) {
       setSelected(t(currentLanguageOption.label));
     }
-  }, [language, t]);
+    window.ipc.send('choosed-language', { lang: currentLanguageOption.value });
+  }, [language, i18n]);
+  
+  useEffect(() => {
+    window.ipc.invoke('get-user-preferences').then(async (result: UserPreferences) => {
+      let UiPreferences = result.UiPreferences;
+      if (UiPreferences["choosedLanguage"]) {
+        setLanguage(UiPreferences["choosedLanguage"]);
+      } else {
+        setLanguage('fr');
+      }
+    });
+  }, []);
 
-  const [selected, setSelected] = useState(t("languageSelector_english"));
 
   return (
     <SelectMenu

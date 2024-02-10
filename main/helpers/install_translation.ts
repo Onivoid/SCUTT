@@ -1,13 +1,15 @@
 import fs from 'fs';
 import path from 'path';
 import axios from 'axios';
-import translationsFolders from '../../main/helpers/translationsFolders.json';
 import logger from '../logs/logger';
+import Translation from './class/translation';
 
-export default async function installTranslation(localization: string, lang: string) {
+export default async function installTranslation(translation: Translation, localization: string, lang: string) {
   const userCfgPath = path.join(localization, "user.cfg");
-  const link = translationsFolders[lang].link;
-  const folder = translationsFolders[lang].folder;
+  const link = translation.url
+  const folder = await axios.get("https://scutt.onivoid.fr/api/translations/folders").then((res) => {
+    return res.data[lang].folder;
+  });
 
   try {
     if (!fs.existsSync(userCfgPath)) {

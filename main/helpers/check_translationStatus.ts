@@ -1,10 +1,13 @@
 import fs from 'fs';
 import path from 'path';
-import translationsFolders from '../../main/helpers/translationsFolders.json';
+import axios from 'axios';
 
 export default async function checkTranslationStatus(localisation: string, lang: string) {
+  const translationDir = await axios.get("https://scutt.onivoid.fr/api/translations/folders").then((res) => {
+    return res.data[lang].folder;
+  });
   const userCfgPath = path.join(localisation, 'user.cfg');
-  const LocalizationDir = path.join(localisation, 'data', 'Localization', translationsFolders[lang].folder);
+  const LocalizationDir = path.join(localisation, 'data', 'Localization', translationDir);
   const globalIniPath = path.join(LocalizationDir, 'global.ini');
 
   try {
@@ -13,15 +16,11 @@ export default async function checkTranslationStatus(localisation: string, lang:
     await fs.promises.access(globalIniPath);
 
     return {
-      enabled: translationsFolders[lang].enabled,
       response: true,
-      link: translationsFolders[lang].link,
     };
   } catch {
     return {
-      enabled: translationsFolders[lang].enabled,
       response: false,
-      link: translationsFolders[lang].link,
     };
   }
 }
