@@ -6,7 +6,7 @@ import Content from '../components/content';
 import { LanguageProvider, useLanguage } from '../components/languageContext';
 
 import '../styles/global/index.css';
-import { toaster } from 'evergreen-ui';
+import { toaster, Dialog, Button, Pane } from 'evergreen-ui';
 import { useTranslation } from 'react-i18next';
 import UserPreferences from '../../main/database/class/UserPreferences';
 
@@ -15,6 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const [notified, setNotified] = useState(false);
   const { changeLanguage } = useLanguage();
+  const [isShown, setIsShown] = useState(true);
 
   useEffect(() => {
     window.ipc.invoke('get-user-preferences').then(async (result: UserPreferences) => {
@@ -30,7 +31,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
     if (router.pathname !== '/run') {
-      window.ipc.send('last-visited', {page: router.pathname});
+      window.ipc.send('last-visited', { page: router.pathname });
       window.ipc.invoke('is-elevated').then((elevated) => {
         if (!elevated && !notified) {
           setNotified(true);
@@ -43,6 +44,14 @@ function MyApp({ Component, pageProps }: AppProps) {
     }
   }, [router.pathname]);
 
+  const upgradeToMultitool = () => {
+    window.ipc.send('upgradeToMultitool', {});
+  }
+
+  const discordHandler = () => {
+    window.ipc.send("joinTechnicalDiscord", {});
+  }
+
   if (router.pathname === '/run') {
     return (
       <LanguageProvider>
@@ -53,7 +62,24 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <LanguageProvider>
       <Content>
-          <Component {...pageProps} />
+        <Dialog
+          isShown={isShown}
+          title={"⚠️ SCUTT n'est plus maintenu ⚠️"}
+          intent="warning"
+          onCloseComplete={() => setIsShown(false)}
+          confirmLabel={"Télécharger Multitool"}
+          onConfirm={upgradeToMultitool}
+          cancelLabel='Fermer'
+        >
+          <p style={{ color: "#333333" }}>
+            L'application <b>SCUTT</b> n'est plus maintenue. Vous pouvez continuer à l'utiliser, mais aucune mise à jour ne sera publiée.
+            Vous pouvez retrouver la fonctionnalité de <b>SCUTT</b> dans l'application <b>Multitool</b>, qui est plus stable et rapide.
+            Vous pouvez <a onClick={upgradeToMultitool} style={{ color: "#12a1ff", cursor: "pointer" }}>
+              télécharger <b>Multitool</b>
+            </a> sur le Microsoft Store ou <a onClick={discordHandler} style={{ color: "#12a1ff", cursor: "pointer" }}>rejoindre le Discord pour plus d'informations.</a>
+          </p>
+        </Dialog>
+        <Component {...pageProps} />
       </Content>
     </LanguageProvider>
   );

@@ -7,4 +7,7 @@ export async function socialEvents() {
   ipcMain.on('joinTechnicalDiscord', async () => {
     return shell.openExternal('https://discord.gg/aUEEdMdS6j');
   });
+  ipcMain.on('upgradeToMultitool', async () => {
+    return shell.openExternal('https://apps.microsoft.com/detail/9MWD1VN65WCN?hl=fr&gl=FR&ocid=pdpshare');
+  });
 }
